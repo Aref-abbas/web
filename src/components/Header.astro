@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.jpg';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="AR Holz- und Bautenschutz – Startseite">
+      <span class="brand-mark"><Image src={logo} alt="" width={44} height={40} format="webp" quality={80} /></span>
+      <span class="brand-copy">
+        <strong>AR Holz- &amp; Bautenschutz</strong>
+        <span>Konstanz</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Hauptnavigation">
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/#arbeiten">Einblicke</a>
+      <a href="/#ablauf">Ablauf</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+
+    <a class="header-call" href="tel:+491772156157" aria-label="Aref Razai unter 0177 2156157 anrufen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.4 8 7.8 9.6a15.2 15.2 0 0 0 6.6 6.6l1.6-1.6 4.5 2.2-.8 3.4c-.2.8-.9 1.3-1.7 1.3A15.5 15.5 0 0 1 2.5 6c0-.8.5-1.5 1.3-1.7l3.4-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <span>0177 2156157</span>
+    </a>
+
+    <details class="mobile-menu">
+      <summary aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </summary>
+      <nav aria-label="Mobile Navigation">
+        <a href="/#leistungen">Leistungen</a>
+        <a href="/#arbeiten">Einblicke</a>
+        <a href="/#ablauf">Ablauf</a>
+        <a href="/#kontakt">Kontakt</a>
+        <a href="tel:+491772156157">Jetzt anrufen</a>
+      </nav>
+    </details>
+  </div>
+</header>

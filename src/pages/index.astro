@@ -1,0 +1,245 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import logo from '../assets/logo.jpg';
+import heroImage from '../assets/projects/dachflaeche-moos.jpg';
+import roofDetail from '../assets/projects/dachreinigung-konstanz.jpg';
+import roofChannel from '../assets/projects/dachrinne-vorher.jpg';
+import tileRepair from '../assets/projects/dachziegel-reparatur.jpg';
+import sealingBefore from '../assets/projects/abdichtung-vorher.jpg';
+import sealingAfter from '../assets/projects/abdichtung-nachher.jpg';
+
+const title = 'AR Holz- & Bautenschutz | Dachservice in Konstanz';
+const description = 'Dachreinigung, Moosentfernung, kleine Reparaturen, Holzschutz und Abdichtungen in Konstanz. AR Holz- & Bautenschutz direkt anfragen.';
+
+const services = [
+  {
+    number: '01',
+    title: 'Dachreinigung & Moosentfernung',
+    text: 'Moos, Laub und lose Ablagerungen werden im vereinbarten Bereich entfernt.',
+    icon: '<path d="M3 11.5 12 4l9 7.5M6 10v9h12v-9M9 15c1-2 2-3.2 3-4 1 1.3 2.2 2.5 3 4"/>',
+  },
+  {
+    number: '02',
+    title: 'Dach- & Randbereiche',
+    text: 'Reinigung von Dachbereichen, Kiesstreifen und schwer zugänglichen Randzonen.',
+    icon: '<path d="M4 6h16M5 6l1.5 12h11L19 6M8 10h8M9 14h6"/>',
+  },
+  {
+    number: '03',
+    title: 'Kleine Reparaturarbeiten',
+    text: 'Beschädigte oder verrutschte Bauteile werden geprüft und im abgestimmten Umfang instand gesetzt.',
+    icon: '<path d="m14 5 5 5M13 6l2-2 5 5-2 2M12 7 4 15l-1 5 5-1 8-8M5 15l4 4"/>',
+  },
+  {
+    number: '04',
+    title: 'Holzschutz',
+    text: 'Pflege und Schutz von außenliegenden Holzteilen – passend zu Untergrund und Beanspruchung.',
+    icon: '<path d="M4 18c4-1 5-5 6-12 5 1 8 4 9 8-1 4-5 6-9 4M7 20c2-5 5-8 9-10"/>',
+  },
+  {
+    number: '05',
+    title: 'Abdichtungen',
+    text: 'Detailabdichtungen an Anschlüssen und Übergängen – sorgfältig vorbereitet und ausgeführt.',
+    icon: '<path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6l-7-3ZM9 12l2 2 4-4"/>',
+  },
+  {
+    number: '06',
+    title: 'Kies- & Laubentfernung',
+    text: 'Kies, Laub und Schmutz werden aus den vereinbarten Dach- und Randbereichen entfernt.',
+    icon: '<path d="M5 17c4 1 8-2 10-10 3 2 4 5 2 8-2 4-7 5-12 2ZM6 20c3-4 6-7 10-9"/>',
+  },
+];
+
+const businessData = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: 'AR Holz- & Bautenschutz',
+  founder: 'Aref Razai',
+  url: 'https://www.ar-dach.de/',
+  telephone: '+49 177 2156157',
+  email: 'AR.Holzschutz@web.de',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Bücklestraße 9 A',
+    postalCode: '78467',
+    addressLocality: 'Konstanz',
+    addressCountry: 'DE',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Konstanz',
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(businessData)} />
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> Holz- &amp; Bautenschutz in Konstanz</div>
+        <h1>Pflege, Reparatur und Schutz <em>rund ums Dach.</em></h1>
+        <p class="hero-lead">AR Holz- &amp; Bautenschutz übernimmt Reinigungs-, Schutz- und kleinere Reparaturarbeiten. Persönlich ausgeführt, klar abgestimmt und direkt erreichbar.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="tel:+491772156157">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.4 8 7.8 9.6a15.2 15.2 0 0 0 6.6 6.6l1.6-1.6 4.5 2.2-.8 3.4c-.2.8-.9 1.3-1.7 1.3A15.5 15.5 0 0 1 2.5 6c0-.8.5-1.5 1.3-1.7l3.4-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            Jetzt anrufen
+          </a>
+          <a class="button button-secondary" href="mailto:AR.Holzschutz@web.de?subject=Anfrage%20über%20ar-dach.de">Per E-Mail anfragen</a>
+        </div>
+        <div class="hero-facts" aria-label="Unternehmensmerkmale">
+          <div><strong>Direkt</strong><span>ein Ansprechpartner</span></div>
+          <div><strong>Vor Ort</strong><span>Sitz in Konstanz</span></div>
+          <div><strong>Eingetragen</strong><span>HWK Konstanz</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-wrap">
+          <Image src={heroImage} alt="Ziegeldach mit Moos und Laub vor den Reinigungsarbeiten" widths={[560, 760, 980]} sizes="(max-width: 880px) 100vw, 48vw" format="webp" quality={82} loading="eager" />
+          <div class="hero-image-shade"></div>
+          <span class="hero-caption">Arbeitsaufnahme · Dachpflege</span>
+        </div>
+        <div class="owner-card">
+          <Image src={logo} alt="Logo AR Holz- und Bautenschutz" width={66} height={60} format="webp" quality={85} />
+          <div><span>Ihr Ansprechpartner</span><strong>Aref Razai</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-band">
+    <div class="container intro-band-inner">
+      <p>Manchmal braucht es keine große Sanierung, sondern eine saubere Lösung an der richtigen Stelle.</p>
+      <a href="#leistungen">Leistungen ansehen <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <section class="section services" id="leistungen">
+    <div class="container">
+      <div class="section-heading split-heading">
+        <div>
+          <span class="section-kicker">Leistungen</span>
+          <h2>Was wir für Sie übernehmen.</h2>
+        </div>
+        <p>Überschaubare Arbeiten, klar besprochen: vom Entfernen von Ablagerungen bis zur Reparatur und Detailabdichtung.</p>
+      </div>
+      <div class="services-grid">
+        {services.map((service) => (
+          <article class="service-card">
+            <div class="service-top">
+              <span class="service-number">{service.number}</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.icon}></svg>
+            </div>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section work-showcase" id="arbeiten">
+    <div class="container">
+      <div class="section-heading work-heading">
+        <span class="section-kicker light">Einblicke in die Arbeit</span>
+        <h2>Echte Aufnahmen.<br />Sauber eingeordnet.</h2>
+        <p>Die Bilder zeigen Ausgangslagen und laufende Arbeiten an Dächern in der Region. Keine Katalogbilder, keine erfundenen Vorher-Nachher-Versprechen.</p>
+      </div>
+
+      <div class="work-grid">
+        <figure class="work-card work-card-large">
+          <Image src={roofDetail} alt="Ziegeldach mit Moos und Ablagerungen vor der Reinigung" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 60vw" format="webp" quality={80} />
+          <figcaption><span>01</span><div><strong>Dachpflege</strong><small>Ausgangslage vor der Reinigung</small></div></figcaption>
+        </figure>
+        <figure class="work-card">
+          <Image src={roofChannel} alt="Verschmutzter Dachanschluss vor den Reinigungsarbeiten" widths={[420, 620, 800]} sizes="(max-width: 760px) 100vw, 38vw" format="webp" quality={80} />
+          <figcaption><span>02</span><div><strong>Randbereiche</strong><small>Arbeitsbereich vor der Säuberung</small></div></figcaption>
+        </figure>
+        <figure class="work-card work-card-wide">
+          <Image src={tileRepair} alt="Ziegeldach während kleiner Reparaturarbeiten" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 58vw" format="webp" quality={80} />
+          <figcaption><span>03</span><div><strong>Kleine Reparaturen</strong><small>Arbeitsaufnahme während der Ausführung</small></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sealing-section">
+    <div class="container sealing-grid">
+      <div class="sealing-copy">
+        <span class="section-kicker">Detailabdichtung</span>
+        <h2>Der Unterschied steckt im Anschluss.</h2>
+        <p>Bei Übergängen an Türen und Bauteilen kommt es auf Vorbereitung und saubere Anschlüsse an. Diese Aufnahmen dokumentieren eine ausgeführte Detailabdichtung.</p>
+        <ul class="check-list">
+          <li><span>✓</span> Untergrund und Anschluss prüfen</li>
+          <li><span>✓</span> Arbeitsbereich sorgfältig vorbereiten</li>
+          <li><span>✓</span> Abdichtung im Detail ausführen</li>
+        </ul>
+      </div>
+      <div class="sealing-comparison">
+        <figure>
+          <Image src={sealingBefore} alt="Türanschluss während der Vorbereitung einer Abdichtung" widths={[380, 560]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
+          <figcaption>Vorbereitung</figcaption>
+        </figure>
+        <figure>
+          <Image src={sealingAfter} alt="Fertig ausgeführte Abdichtung an einem Türanschluss" widths={[380, 560]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
+          <figcaption>Ausführung</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="ablauf">
+    <div class="container">
+      <div class="section-heading centered-heading">
+        <span class="section-kicker">So läuft es ab</span>
+        <h2>In drei Schritten zur passenden Lösung.</h2>
+      </div>
+      <ol class="process-grid">
+        <li>
+          <span class="process-step">01</span>
+          <h3>Kurz melden</h3>
+          <p>Rufen Sie an oder senden Sie eine E-Mail. Beschreiben Sie kurz, worum es geht – Fotos helfen bei der ersten Einordnung.</p>
+        </li>
+        <li>
+          <span class="process-step">02</span>
+          <h3>Arbeit abstimmen</h3>
+          <p>Umfang, Zugang und nächster Schritt werden direkt mit Aref Razai besprochen.</p>
+        </li>
+        <li>
+          <span class="process-step">03</span>
+          <h3>Sauber ausführen</h3>
+          <p>Die vereinbarten Arbeiten werden persönlich und nachvollziehbar umgesetzt.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="contact-section" id="kontakt">
+    <div class="container contact-grid">
+      <div class="contact-copy">
+        <span class="section-kicker light">Direkter Kontakt</span>
+        <h2>Was ist bei Ihnen zu tun?</h2>
+        <p>Eine kurze Beschreibung und ein bis drei Fotos genügen für den ersten Kontakt. Aref Razai meldet sich persönlich zurück.</p>
+        <div class="contact-actions">
+          <a class="contact-action" href="tel:+491772156157">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.4 8 7.8 9.6a15.2 15.2 0 0 0 6.6 6.6l1.6-1.6 4.5 2.2-.8 3.4c-.2.8-.9 1.3-1.7 1.3A15.5 15.5 0 0 1 2.5 6c0-.8.5-1.5 1.3-1.7l3.4-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span><small>Telefon</small><strong>+49 177 2156157</strong></span>
+          </a>
+          <a class="contact-action" href="mailto:AR.Holzschutz@web.de?subject=Anfrage%20über%20ar-dach.de">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3V6Zm1 1 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span><small>E-Mail</small><strong>AR.Holzschutz@web.de</strong></span>
+          </a>
+        </div>
+      </div>
+      <aside class="contact-card">
+        <Image src={logo} alt="Logo AR Holz- und Bautenschutz" width={96} height={86} format="webp" quality={85} />
+        <h3>AR Holz- &amp; Bautenschutz</h3>
+        <p><strong>Aref Razai</strong><br />Bücklestraße 9 A<br />78467 Konstanz</p>
+        <span class="registration-note">Eingetragen bei der Handwerkskammer Konstanz</span>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
