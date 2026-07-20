@@ -1,0 +1,871 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const sceneId = `roof-scene-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  class:list={['roof-cleaning-scene', className]}
+  data-roof-cleaning-scene
+  data-state="idle"
+  aria-hidden="true"
+>
+  <svg class="scene-art" viewBox="0 0 800 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id={`${sceneId}-paper`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#faf6ef" />
+        <stop offset=".52" stop-color="#efe7da" />
+        <stop offset="1" stop-color="#dfd3c3" />
+      </linearGradient>
+      <linearGradient id={`${sceneId}-roof`} x1=".08" y1=".05" x2=".92" y2=".95">
+        <stop offset="0" stop-color="#66544c" />
+        <stop offset=".48" stop-color="#4b403c" />
+        <stop offset="1" stop-color="#302c2a" />
+      </linearGradient>
+      <linearGradient id={`${sceneId}-clean`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#a6755f" />
+        <stop offset=".48" stop-color="#bd7657" />
+        <stop offset="1" stop-color="#774f43" />
+      </linearGradient>
+      <linearGradient id={`${sceneId}-wall`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d9c9b5" />
+        <stop offset="1" stop-color="#a89680" />
+      </linearGradient>
+      <linearGradient id={`${sceneId}-wall-side`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#af9e89" />
+        <stop offset="1" stop-color="#74695e" />
+      </linearGradient>
+      <linearGradient id={`${sceneId}-water`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#f7ffff" stop-opacity=".95" />
+        <stop offset=".52" stop-color="#a6def0" stop-opacity=".86" />
+        <stop offset="1" stop-color="#eaffff" stop-opacity=".18" />
+      </linearGradient>
+      <radialGradient id={`${sceneId}-glow`} cx="50%" cy="45%" r="60%">
+        <stop offset="0" stop-color="#fff" stop-opacity=".92" />
+        <stop offset=".35" stop-color="#d9f5ff" stop-opacity=".7" />
+        <stop offset="1" stop-color="#a7ddec" stop-opacity="0" />
+      </radialGradient>
+      <pattern id={`${sceneId}-grid`} width="38" height="38" patternUnits="userSpaceOnUse">
+        <path d="M38 0H0V38" fill="none" stroke="#171715" stroke-opacity=".055" stroke-width="1" />
+      </pattern>
+      <pattern id={`${sceneId}-tiles`} width="52" height="34" patternUnits="userSpaceOnUse" patternTransform="skewY(7)">
+        <path d="M0 1h52M0 33h52" fill="none" stroke="#171715" stroke-opacity=".42" stroke-width="2" />
+        <path d="M6 1v14c0 8 7 14 20 14s20-6 20-14V1" fill="none" stroke="#211e1c" stroke-opacity=".58" stroke-width="2.2" />
+        <path d="M10 5v10c0 6 5 10 16 10s16-4 16-10V5" fill="none" stroke="#f3d8c7" stroke-opacity=".1" stroke-width="1.2" />
+      </pattern>
+      <pattern id={`${sceneId}-clean-tiles`} width="52" height="34" patternUnits="userSpaceOnUse" patternTransform="skewY(7)">
+        <rect width="52" height="34" fill={`url(#${sceneId}-clean)`} />
+        <path d="M0 1h52M0 33h52" fill="none" stroke="#5f372d" stroke-opacity=".52" stroke-width="2" />
+        <path d="M6 1v14c0 8 7 14 20 14s20-6 20-14V1" fill="none" stroke="#5b342c" stroke-opacity=".72" stroke-width="2.2" />
+        <path d="M10 5v10c0 6 5 10 16 10s16-4 16-10V5" fill="none" stroke="#ffe1d0" stroke-opacity=".22" stroke-width="1.2" />
+      </pattern>
+      <clipPath id={`${sceneId}-roof-clip`}>
+        <path d="M77 372 377 188 724 379 405 575Z" />
+      </clipPath>
+      <filter id={`${sceneId}-shadow`} x="-30%" y="-30%" width="160%" height="180%">
+        <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#171715" flood-opacity=".22" />
+      </filter>
+      <filter id={`${sceneId}-soft`} x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="8" />
+      </filter>
+      <filter id={`${sceneId}-mist`} x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="3.5" />
+      </filter>
+    </defs>
+
+    <rect width="800" height="720" fill={`url(#${sceneId}-paper)`} />
+    <rect class="scene-grid" width="800" height="720" fill={`url(#${sceneId}-grid)`} />
+    <circle class="scene-sun" cx="690" cy="96" r="152" fill="#d45f2e" opacity=".08" />
+    <circle class="scene-sun-ring" cx="690" cy="96" r="92" fill="none" stroke="#d45f2e" stroke-opacity=".13" stroke-width="1.5" />
+    <path class="scene-route" d="M26 590C173 646 292 663 449 646c147-16 240-68 342-149" fill="none" stroke="#171715" stroke-opacity=".08" stroke-width="1.5" stroke-dasharray="4 12" />
+
+    <g class="scene-label">
+      <rect x="144" y="38" width="220" height="42" rx="21" fill="#171715" />
+      <circle cx="166" cy="59" r="5" fill="#d45f2e" />
+      <text x="182" y="64" fill="#fffaf2" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2.1">DACHREINIGUNG</text>
+    </g>
+
+    <g class="scene-atmosphere">
+      <path d="M102 179c36-23 72-34 110-34" fill="none" stroke="#171715" stroke-opacity=".13" stroke-width="2" stroke-linecap="round" />
+      <path d="M112 198c26-15 49-22 79-21" fill="none" stroke="#d45f2e" stroke-opacity=".28" stroke-width="2" stroke-linecap="round" />
+      <circle cx="95" cy="203" r="4" fill="#d45f2e" opacity=".55" />
+    </g>
+
+    <ellipse cx="405" cy="603" rx="315" ry="58" fill="#171715" opacity=".15" filter={`url(#${sceneId}-soft)`} />
+
+    <g class="roof-model" filter={`url(#${sceneId}-shadow)`}>
+      <path d="M77 372 405 575v55L77 424Z" fill={`url(#${sceneId}-wall)`} />
+      <path d="m405 575 319-196v52L405 630Z" fill={`url(#${sceneId}-wall-side)`} />
+      <path d="M77 372 377 188l347 191-319 196Z" fill={`url(#${sceneId}-roof)`} />
+
+      <g clip-path={`url(#${sceneId}-roof-clip)`}>
+        <rect x="38" y="157" width="730" height="450" fill={`url(#${sceneId}-tiles)`} opacity=".94" />
+        <path d="M70 360 411 577" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="5" />
+        <path d="M374 185 728 381" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="4" />
+
+        <g class="roof-weathering">
+          <path d="M132 385c41-9 78-3 110 16s50 26 83 22c-22 24-57 40-103 35-53-5-92-30-110-53Z" fill="#45513c" opacity=".34" />
+          <path d="M491 312c47 0 83 14 113 41-47 1-88 12-125 34-18-18-22-46 12-75Z" fill="#3d4939" opacity=".27" />
+          <path d="M184 471c49-8 82-1 117 25-39 8-67 22-88 41-23-11-36-34-29-66Z" fill="#252a25" opacity=".4" />
+          <circle cx="214" cy="384" r="17" fill="#718060" opacity=".23" />
+          <circle cx="571" cy="378" r="23" fill="#67765a" opacity=".21" />
+          <circle cx="333" cy="492" r="14" fill="#86906a" opacity=".18" />
+        </g>
+
+        <path class="cleaning-feather animated" d="M366 404c-27 19-53 37-76 55-13 10-24 19-34 28" fill="none" stroke="#d7a387" stroke-opacity=".24" stroke-width="76" stroke-linecap="round" stroke-dasharray="240" stroke-dashoffset="0" filter={`url(#${sceneId}-soft)`} />
+        <path class="cleaning-pass animated" d="M366 404c-27 19-53 37-76 55-13 10-24 19-34 28" fill="none" stroke={`url(#${sceneId}-clean-tiles)`} stroke-width="62" stroke-linecap="round" stroke-dasharray="240" stroke-dashoffset="0" />
+        <path class="wet-pass animated" d="M366 404c-27 19-53 37-76 55-13 10-24 19-34 28" fill="none" stroke="#d9f4f5" stroke-opacity=".2" stroke-width="68" stroke-linecap="round" stroke-dasharray="240" stroke-dashoffset="0" />
+        <g class="runoff-streaks animated">
+          <path d="M307 445c-12 24-20 45-23 65M329 425c-13 26-19 46-21 68M282 466c-10 18-16 35-17 49" fill="none" stroke="#d8f4f7" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" />
+          <path d="M283 510c-2 5-2 9-1 13M307 494c-1 7-1 12 1 17" fill="none" stroke="#effdff" stroke-opacity=".64" stroke-width="2" stroke-linecap="round" />
+        </g>
+      </g>
+
+      <path d="M76 372 405 575l320-196" fill="none" stroke="#211e1c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M79 381 405 584l317-195" fill="none" stroke="#d8c2af" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" />
+
+      <g class="chimney">
+        <path d="m548 246 61 34-1 83-62 36-59-34 1-83Z" fill="#8b513d" />
+        <path d="m488 282 61 34 60-36-61-33Z" fill="#bc795b" />
+        <path d="m498 291 50 28 49-29-49-26Z" fill="#2b2927" />
+        <path d="m497 306 51 28m-51 8 51 29m13-60v76m27-93v76" fill="none" stroke="#e0b49b" stroke-opacity=".68" stroke-width="3" />
+        <path d="M489 324h118m-118 35h118" fill="none" stroke="#e0b49b" stroke-opacity=".55" stroke-width="3" />
+        <path d="m480 282 68 39 68-40" fill="none" stroke="#171715" stroke-opacity=".6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+
+      <g class="gutter">
+        <path d="M79 401 405 604l318-197" fill="none" stroke="#242423" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M80 397 405 599l316-195" fill="none" stroke="#86837d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+
+      <path class="hose-shadow" d="M610 494c-39 5-58-16-52-45 5-24-13-42-36-31-23 11-39-2-31-21 7-17 2-30-14-38" fill="none" stroke="#0d0d0c" stroke-opacity=".42" stroke-width="11" stroke-linecap="round" />
+      <path class="hose" d="M610 491c-37 5-54-15-48-41 6-27-15-46-40-34-25 12-43-3-34-22 7-16 1-27-13-35" fill="none" stroke="#292826" stroke-width="7" stroke-linecap="round" />
+      <path class="hose-highlight" d="M608 488c-34 4-47-14-41-36 7-28-17-42-39-32" fill="none" stroke="#7f7770" stroke-opacity=".48" stroke-width="1.6" stroke-linecap="round" />
+
+      <g class="washer-unit">
+        <ellipse cx="625" cy="505" rx="34" ry="13" fill="#171715" opacity=".25" />
+        <path d="M610 446v-28c0-8 6-14 14-14h15" fill="none" stroke="#242423" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M612 446v-27c0-6 5-10 11-10h16" fill="none" stroke="#817c75" stroke-opacity=".7" stroke-width="2" stroke-linecap="round" />
+        <path d="m596 444 46 25v48l-46-26Z" fill="#222220" />
+        <path d="m642 469 29-17v47l-29 18Z" fill="#0f0f0e" />
+        <path d="m596 444 29-17 46 25-29 17Z" fill="#d45f2e" />
+        <rect x="606" y="451" width="24" height="6" rx="3" transform="rotate(29 606 451)" fill="#fff7ed" opacity=".78" />
+        <circle cx="650" cy="468" r="5" fill="#d9d6ce" />
+        <circle cx="650" cy="468" r="2.4" fill="#3f3e3b" />
+        <circle cx="603" cy="482" r="4.5" fill="#181817" />
+        <path d="m606 483-8 5" fill="none" stroke="#9f9990" stroke-width="2.2" stroke-linecap="round" />
+        <circle cx="606" cy="501" r="10" fill="#171715" />
+        <circle cx="657" cy="502" r="10" fill="#171715" />
+        <circle cx="606" cy="501" r="4" fill="#98938a" />
+        <circle cx="657" cy="502" r="4" fill="#98938a" />
+      </g>
+
+      <g class="worker animated">
+        <ellipse cx="458" cy="399" rx="28" ry="8" fill="#171715" opacity=".13" />
+        <ellipse cx="423" cy="409" rx="17" ry="5" transform="rotate(-12 423 409)" fill="#171715" opacity=".2" />
+        <ellipse cx="498" cy="401" rx="17" ry="5" transform="rotate(12 498 401)" fill="#171715" opacity=".18" />
+        <g class="worker-leg worker-leg-back animated">
+          <path d="M459 356c8 1 14 5 17 12l9 17 16 7-7 11-22-8-15-25Z" fill="#282826" />
+          <path d="m478 380 10 5-5 9-10-4Z" fill="#3e3c39" />
+          <path d="M494 389c6 1 14 5 18 9 2 2 1 6-3 7-9 1-18-2-25-7Z" fill="#171715" />
+          <path d="M489 397c7 3 14 4 21 3" fill="none" stroke="#77726a" stroke-width="1.8" stroke-linecap="round" />
+        </g>
+        <g class="worker-leg worker-leg-front animated">
+          <path d="M454 356c-8 0-14 4-15 12l-2 18-12 11 9 9 17-14 8-24Z" fill="#373633" />
+          <path d="m437 381 12 2-2 10-12-1Z" fill="#4a4844" />
+          <path d="M430 393c-8 3-15 8-19 13-2 3 0 6 4 7 10 0 19-4 26-11Z" fill="#191918" />
+          <path d="M414 408c8 1 17-2 24-7" fill="none" stroke="#7c766e" stroke-width="1.8" stroke-linecap="round" />
+        </g>
+        <path d="M434 354c12-5 33-5 47 1l-3 15c-13-4-28-4-43 0Z" fill="#242423" />
+        <path d="M437 355c12 3 27 3 41 0" fill="none" stroke="#d45f2e" stroke-opacity=".7" stroke-width="3" />
+        <path class="worker-torso" d="M436 301c7-9 21-13 33-8 13 6 21 23 18 43l-7 34-48-6 1-35c0-12-1-21 3-28Z" fill="#d45f2e" />
+        <path d="m442 304 17 18 19-20 8 13-23 27-30-24Z" fill="#fff7ed" opacity=".88" />
+        <path d="m439 329 21 14 22-15" fill="none" stroke="#f6e9da" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M459 321v43" fill="none" stroke="#fff7ed" stroke-opacity=".72" stroke-width="3" />
+        <path d="M452 321v43" fill="none" stroke="#171715" stroke-opacity=".38" stroke-width="4" />
+        <path d="M474 312c13 10 16 21 11 34" fill="none" stroke="#b8a18f" stroke-width="12" stroke-linecap="round" />
+        <path d="m484 344-26 10" fill="none" stroke="#b8a18f" stroke-width="10" stroke-linecap="round" />
+        <path d="M439 312c-13 8-17 20-13 31" fill="none" stroke="#bdab9d" stroke-width="12" stroke-linecap="round" />
+        <path d="M427 342c2 9 4 17 5 25" fill="none" stroke="#bdab9d" stroke-width="10" stroke-linecap="round" />
+        <circle cx="456" cy="278" r="20" fill="#bfa791" />
+        <path d="M437 278c1-20 13-30 27-27 11 3 17 12 15 26-14-6-27-5-42 1Z" fill="#171715" />
+        <path d="M434 271c4-21 14-29 28-28 13 1 22 10 22 27-17-6-33-6-50 1Z" fill="#d45f2e" />
+        <path d="M442 257c9-7 23-8 32 0" fill="none" stroke="#f18455" stroke-width="3" stroke-linecap="round" />
+        <path d="M432 272c17-7 35-7 54 0" fill="none" stroke="#171715" stroke-width="5" stroke-linecap="round" />
+        <circle cx="458" cy="353" r="6" fill="#242423" />
+        <circle cx="432" cy="367" r="5.5" fill="#2d2c2a" />
+        <path d="m459 354-17 9" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" />
+        <path d="m447 359-89 51" fill="none" stroke="#171715" stroke-opacity=".3" stroke-width="7" stroke-linecap="round" />
+        <path d="m447 357-89 53" fill="none" stroke="#45433f" stroke-width="4.5" stroke-linecap="round" />
+        <path d="m448 357 6 13-8 6" fill="none" stroke="#242423" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M475 359c-8 1-14 5-20 11" fill="none" stroke="#292826" stroke-width="6" stroke-linecap="round" />
+        <circle cx="454" cy="370" r="3.5" fill="#858079" />
+        <path d="m358 410-35 20" fill="none" stroke="#d45f2e" stroke-width="5" stroke-linecap="round" />
+        <path d="m358 408-34 20" fill="none" stroke="#d6d2cb" stroke-opacity=".62" stroke-width="1.5" stroke-linecap="round" />
+
+        <g class="water-jet animated">
+          <path d="M322 431c-14 11-35 25-61 40" fill="none" stroke={`url(#${sceneId}-water)`} stroke-width="12" stroke-linecap="round" filter={`url(#${sceneId}-mist)`} />
+          <path class="jet-core" d="M322 431c-15 11-35 24-63 40" fill="none" stroke="#effeff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="8 7" />
+          <path d="M320 431c-16 15-36 30-64 45M321 429c-19 9-38 20-65 35" fill="none" stroke="#dcf7fb" stroke-opacity=".44" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="263" cy="470" rx="28" ry="13" transform="rotate(-31 263 470)" fill={`url(#${sceneId}-glow)`} />
+          <path d="M240 473c14-14 30-16 46-5M245 483c13-9 25-10 37-4" fill="none" stroke="#effdff" stroke-opacity=".58" stroke-width="2" stroke-linecap="round" />
+          <circle cx="286" cy="456" r="4" fill="#eaffff" opacity=".8" />
+          <circle cx="253" cy="482" r="5" fill="#c8f1fa" opacity=".7" />
+          <circle cx="277" cy="478" r="3" fill="#fff" opacity=".8" />
+        </g>
+      </g>
+    </g>
+
+    <g class="screen-burst animated" transform="translate(398 363)">
+      <circle r="78" fill={`url(#${sceneId}-glow)`} opacity=".88" />
+      <circle r="38" fill="#f2feff" opacity=".64" />
+      <path d="M-12-18-112-108M16-18 128-95M26 9l155 34M3 24l57 151M-20 16l-126 119M-28-2l-172-5" fill="none" stroke="#eafdff" stroke-width="9" stroke-linecap="round" opacity=".86" />
+      <circle cx="-136" cy="-94" r="13" fill="#e8fbff" opacity=".8" />
+      <circle cx="151" cy="-72" r="9" fill="#e8fbff" opacity=".72" />
+      <circle cx="164" cy="67" r="17" fill="#d7f6ff" opacity=".7" />
+      <circle cx="58" cy="168" r="12" fill="#effdff" opacity=".78" />
+      <circle cx="-147" cy="126" r="19" fill="#d7f6ff" opacity=".62" />
+    </g>
+
+    <g class="scene-corner-mark">
+      <path d="M706 631h44v-44" fill="none" stroke="#171715" stroke-opacity=".22" stroke-width="2" />
+      <text x="693" y="654" fill="#171715" fill-opacity=".44" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.6">AR · KONSTANZ</text>
+    </g>
+  </svg>
+
+  <canvas class="water-glass" data-roof-scene-canvas aria-hidden="true"></canvas>
+  <div class="scene-vignette" aria-hidden="true"></div>
+</div>
+
+<style>
+  .roof-cleaning-scene {
+    --scene-accent: var(--roof-scene-accent, #d45f2e);
+    --scene-ink: var(--roof-scene-ink, #171715);
+    --scene-paper: var(--roof-scene-paper, #f4f0e8);
+    --scene-radius: var(--roof-scene-radius, 120px 14px 14px 14px);
+    --scene-height: var(--roof-scene-min-height, clamp(500px, 50vw, 650px));
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: 100%;
+    min-height: var(--scene-height);
+    overflow: hidden;
+    border-radius: var(--scene-radius);
+    background: var(--scene-paper);
+    color: var(--scene-ink);
+    box-shadow: 0 24px 60px rgba(18, 17, 15, .12);
+  }
+
+  .scene-art,
+  .water-glass,
+  .scene-vignette {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .scene-art {
+    z-index: 1;
+    color: var(--scene-ink);
+  }
+
+  .scene-grid { mix-blend-mode: multiply; }
+  .scene-sun { fill: var(--scene-accent); }
+  .scene-label circle { fill: var(--scene-accent); }
+
+  .roof-model {
+    transform-origin: 50% 58%;
+    transform-box: fill-box;
+  }
+
+  .scene-sun-ring,
+  .scene-route,
+  .scene-atmosphere,
+  .roof-model,
+  .scene-label {
+    transition: opacity .4s ease;
+  }
+
+  .worker {
+    transform-origin: 50% 88%;
+    transform-box: fill-box;
+  }
+
+  .worker-leg {
+    transform-origin: 50% 5%;
+    transform-box: fill-box;
+  }
+
+  .cleaning-feather,
+  .cleaning-pass,
+  .wet-pass {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 0;
+  }
+
+  .water-jet { opacity: .86; }
+  .runoff-streaks { opacity: 0; }
+  .screen-burst { opacity: 0; transform-origin: center; }
+
+  .water-glass {
+    position: fixed;
+    z-index: 95;
+    width: 100vw;
+    height: 100dvh;
+    display: block;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .28s ease;
+  }
+
+  .scene-vignette {
+    z-index: 6;
+    pointer-events: none;
+    border: 1px solid rgba(23, 23, 21, .08);
+    border-radius: inherit;
+    background:
+      linear-gradient(130deg, rgba(255, 255, 255, .3), transparent 22%),
+      linear-gradient(to top, rgba(23, 23, 21, .09), transparent 28%);
+    box-shadow: inset 0 0 80px rgba(23, 23, 21, .05);
+  }
+
+  .roof-cleaning-scene.is-enhanced:not(.is-playing) .cleaning-pass,
+  .roof-cleaning-scene.is-enhanced:not(.is-playing) .cleaning-feather,
+  .roof-cleaning-scene.is-enhanced:not(.is-playing) .wet-pass {
+    stroke-dashoffset: 240;
+  }
+
+  .roof-cleaning-scene.is-enhanced:not(.is-playing) .water-jet { opacity: 0; }
+
+  .roof-cleaning-scene.is-playing .roof-model {
+    animation: roof-arrival 1.15s cubic-bezier(.2, .76, .2, 1) both;
+  }
+
+  .roof-cleaning-scene.is-playing .worker {
+    animation: worker-route 8s cubic-bezier(.44, .04, .24, 1) both;
+  }
+
+  .roof-cleaning-scene.is-playing .worker-leg-front {
+    animation: step-front .56s ease-in-out 4 alternate 1.05s;
+  }
+
+  .roof-cleaning-scene.is-playing .worker-leg-back {
+    animation: step-back .56s ease-in-out 4 alternate 1.05s;
+  }
+
+  .roof-cleaning-scene.is-playing .cleaning-pass,
+  .roof-cleaning-scene.is-playing .cleaning-feather {
+    animation: clean-reveal 8s cubic-bezier(.24, .68, .18, 1) both;
+  }
+
+  .roof-cleaning-scene.is-playing .runoff-streaks {
+    animation: runoff-reveal 8s ease both;
+  }
+
+  .roof-cleaning-scene.is-playing .wet-pass {
+    animation: wet-reveal 8s cubic-bezier(.24, .68, .18, 1) both;
+  }
+
+  .roof-cleaning-scene.is-playing .water-jet {
+    animation: jet-cycle 8s ease both;
+  }
+
+  .roof-cleaning-scene.is-playing .jet-core {
+    animation: water-flow .36s linear 12 1.2s;
+  }
+
+  .roof-cleaning-scene.is-playing .screen-burst {
+    animation: viewer-splash 8s cubic-bezier(.18, .72, .26, 1) both;
+  }
+
+  .water-glass.is-visible { opacity: 1; }
+  .water-glass.is-cleared { opacity: 0; }
+
+  @keyframes roof-arrival {
+    from { opacity: 0; transform: translateY(22px) scale(.965); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes worker-route {
+    0%, 9% { transform: translate(42px, -20px) scale(.96); }
+    21% { transform: translate(23px, -10px) rotate(-1deg); }
+    36% { transform: translate(2px, 2px) rotate(1.5deg); }
+    52%, 61% { transform: translate(-20px, 14px) rotate(-1deg); }
+    68% { transform: translate(-15px, 10px) rotate(2deg); }
+    74%, 100% { transform: translate(-9px, 6px) rotate(0); }
+  }
+
+  @keyframes step-front {
+    from { transform: rotate(3deg) translateY(-.5px); }
+    to { transform: rotate(-6deg) translateY(.5px); }
+  }
+
+  @keyframes step-back {
+    from { transform: rotate(-4deg) translateY(.5px); }
+    to { transform: rotate(6deg) translateY(-.5px); }
+  }
+
+  @keyframes clean-reveal {
+    0%, 14% { stroke-dashoffset: 240; }
+    58%, 100% { stroke-dashoffset: 0; }
+  }
+
+  @keyframes wet-reveal {
+    0%, 14% { stroke-dashoffset: 240; opacity: 0; }
+    24% { opacity: .8; }
+    58% { stroke-dashoffset: 0; opacity: .58; }
+    82%, 100% { stroke-dashoffset: 0; opacity: .16; }
+  }
+
+  @keyframes runoff-reveal {
+    0%, 30% { opacity: 0; }
+    44%, 66% { opacity: .9; }
+    86%, 100% { opacity: .26; }
+  }
+
+  @keyframes jet-cycle {
+    0%, 13% { opacity: 0; }
+    17%, 57% { opacity: .94; }
+    61%, 100% { opacity: 0; }
+  }
+
+  @keyframes water-flow {
+    to { stroke-dashoffset: -30; }
+  }
+
+  @keyframes viewer-splash {
+    0%, 62% { opacity: 0; transform: translate(398px, 363px) scale(.08); }
+    66% { opacity: .94; transform: translate(398px, 363px) scale(.42); }
+    72% { opacity: .48; transform: translate(398px, 363px) scale(2.45); }
+    78%, 100% { opacity: 0; transform: translate(398px, 363px) scale(3.05); }
+  }
+
+  @media (max-width: 640px) {
+    .roof-cleaning-scene {
+      --scene-radius: var(--roof-scene-radius, 72px 12px 12px 12px);
+      --scene-height: var(--roof-scene-min-height, clamp(400px, 118vw, 540px));
+    }
+
+    .scene-art { transform: scale(1.035); }
+    .scene-atmosphere, .scene-route, .scene-corner-mark { display: none; }
+    .scene-grid { opacity: .6; }
+    .scene-label { transform: translate(22px, 18px) scale(.9); transform-origin: left top; }
+    .roof-weathering circle:nth-of-type(n + 2) { display: none; }
+    .washer-unit { opacity: .9; }
+
+    .roof-cleaning-scene.is-playing .worker {
+      animation-duration: 6.8s;
+    }
+
+    .roof-cleaning-scene.is-playing .cleaning-pass,
+    .roof-cleaning-scene.is-playing .cleaning-feather,
+    .roof-cleaning-scene.is-playing .wet-pass,
+    .roof-cleaning-scene.is-playing .runoff-streaks,
+    .roof-cleaning-scene.is-playing .water-jet,
+    .roof-cleaning-scene.is-playing .screen-burst {
+      animation-duration: 6.8s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .roof-cleaning-scene *,
+    .roof-cleaning-scene *::before,
+    .roof-cleaning-scene *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .roof-cleaning-scene .screen-burst,
+    .water-glass { display: none; }
+
+    .roof-cleaning-scene .water-jet { opacity: .52; }
+    .roof-cleaning-scene .runoff-streaks { opacity: .22; }
+    .roof-cleaning-scene .wet-pass { opacity: .2; }
+  }
+</style>
+
+<script>
+  type Droplet = {
+    x: number;
+    y: number;
+    radius: number;
+    stretch: number;
+    rotation: number;
+    opacity: number;
+    tail: number;
+    wobble: number;
+  };
+
+  const sceneRoots = document.querySelectorAll('[data-roof-cleaning-scene]:not([data-roof-scene-ready])');
+
+  sceneRoots.forEach((sceneRoot) => {
+    if (!(sceneRoot instanceof HTMLElement)) return;
+
+    const canvas = sceneRoot.querySelector('[data-roof-scene-canvas]');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+
+    sceneRoot.dataset.roofSceneReady = 'true';
+
+    const context = canvas.getContext('2d');
+    const filmCanvas = document.createElement('canvas');
+    const filmContext = filmCanvas.getContext('2d');
+
+    if (!context || !filmContext) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compactScene = window.matchMedia('(max-width: 640px)');
+    const abortController = new AbortController();
+    const timers = new Set<number>();
+    const supportsIntersectionObserver = typeof globalThis.IntersectionObserver !== 'undefined';
+    let observer: IntersectionObserver | undefined;
+    let animationFrame = 0;
+    let splashStart = 0;
+    let splashScrollPosition = 0;
+    let wipeProgress = 0;
+    let hasStarted = false;
+    let hasSplashed = false;
+    let isDisposed = false;
+    let sceneWidth = 0;
+    let sceneHeight = 0;
+    let pixelRatio = 1;
+    let droplets: Droplet[] = [];
+
+    const clamp = (value: number, minimum: number, maximum: number) => Math.min(Math.max(value, minimum), maximum);
+    const easeOut = (value: number) => 1 - Math.pow(1 - value, 3);
+
+    const schedule = (callback: () => void, delay: number) => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer);
+        callback();
+      }, delay);
+      timers.add(timer);
+      return timer;
+    };
+
+    const clearTimers = () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+      timers.clear();
+    };
+
+    const seededNumber = (seed: number) => {
+      const value = Math.sin(seed * 9283.17) * 43758.5453;
+      return value - Math.floor(value);
+    };
+
+    const buildDroplets = () => {
+      const dropletCount = compactScene.matches ? 14 : 24;
+      droplets = Array.from({ length: dropletCount }, (_, index) => {
+        const sizeSeed = seededNumber(index + 14);
+        const radius = 2 + sizeSeed * sizeSeed * (compactScene.matches ? 13 : 21);
+        return {
+          x: .05 + seededNumber(index + 31) * .9,
+          y: .04 + seededNumber(index + 67) * .9,
+          radius,
+          stretch: .8 + seededNumber(index + 103) * .58,
+          rotation: -.7 + seededNumber(index + 149) * 1.4,
+          opacity: .28 + seededNumber(index + 191) * .34,
+          tail: seededNumber(index + 227),
+          wobble: .82 + seededNumber(index + 263) * .36,
+        };
+      });
+    };
+
+    const resizeCanvas = () => {
+      sceneWidth = Math.max(1, Math.round(window.innerWidth));
+      sceneHeight = Math.max(1, Math.round(window.innerHeight));
+      pixelRatio = Math.min(window.devicePixelRatio || 1, compactScene.matches ? 1.5 : 2);
+
+      canvas.width = Math.round(sceneWidth * pixelRatio);
+      canvas.height = Math.round(sceneHeight * pixelRatio);
+      filmCanvas.width = canvas.width;
+      filmCanvas.height = canvas.height;
+      buildDroplets();
+
+      if (hasSplashed) renderFilm(performance.now());
+    };
+
+    const paintDroplet = (drawingContext: CanvasRenderingContext2D, droplet: Droplet, arrival: number) => {
+      const centerX = sceneWidth * .5;
+      const centerY = sceneHeight * .48;
+      const targetX = droplet.x * sceneWidth;
+      const targetY = droplet.y * sceneHeight;
+      const x = centerX + (targetX - centerX) * arrival;
+      const y = centerY + (targetY - centerY) * arrival;
+      const radius = droplet.radius * (.15 + arrival * .85);
+
+      drawingContext.save();
+      drawingContext.translate(x, y);
+      drawingContext.rotate(droplet.rotation);
+      drawingContext.scale(1, droplet.stretch);
+      drawingContext.shadowColor = `rgba(52, 91, 101, ${droplet.opacity * .24})`;
+      drawingContext.shadowBlur = Math.max(2, radius * .24);
+      drawingContext.shadowOffsetY = Math.max(1, radius * .08);
+
+      const dropletGradient = drawingContext.createRadialGradient(
+        -radius * .32,
+        -radius * .38,
+        radius * .08,
+        0,
+        0,
+        radius,
+      );
+      dropletGradient.addColorStop(0, `rgba(255, 255, 255, ${droplet.opacity * .92})`);
+      dropletGradient.addColorStop(.18, `rgba(221, 247, 252, ${droplet.opacity * .46})`);
+      dropletGradient.addColorStop(.72, `rgba(127, 190, 207, ${droplet.opacity * .14})`);
+      dropletGradient.addColorStop(1, 'rgba(71, 125, 142, 0)');
+
+      drawingContext.beginPath();
+      drawingContext.moveTo(0, -radius);
+      drawingContext.bezierCurveTo(
+        radius * .72 * droplet.wobble,
+        -radius * .84,
+        radius * 1.02,
+        -radius * .08,
+        radius * .74,
+        radius * .66,
+      );
+      drawingContext.bezierCurveTo(
+        radius * .38,
+        radius * 1.03,
+        -radius * .48,
+        radius * .98,
+        -radius * .78,
+        radius * .5,
+      );
+      drawingContext.bezierCurveTo(
+        -radius * 1.02,
+        radius * .08,
+        -radius * .62 * droplet.wobble,
+        -radius * .82,
+        0,
+        -radius,
+      );
+      drawingContext.closePath();
+      drawingContext.fillStyle = dropletGradient;
+      drawingContext.fill();
+      drawingContext.shadowColor = 'transparent';
+      drawingContext.strokeStyle = `rgba(238, 253, 255, ${droplet.opacity * .52})`;
+      drawingContext.lineWidth = Math.max(.8, radius * .045);
+      drawingContext.stroke();
+
+      drawingContext.beginPath();
+      drawingContext.ellipse(-radius * .3, -radius * .38, radius * .18, radius * .075, -.5, 0, Math.PI * 2);
+      drawingContext.fillStyle = `rgba(255, 255, 255, ${droplet.opacity * .78})`;
+      drawingContext.fill();
+
+      drawingContext.beginPath();
+      drawingContext.ellipse(radius * .14, radius * .28, radius * .48, radius * .2, .08, 0, Math.PI);
+      drawingContext.strokeStyle = `rgba(52, 100, 113, ${droplet.opacity * .18})`;
+      drawingContext.lineWidth = Math.max(.7, radius * .035);
+      drawingContext.stroke();
+
+      if (droplet.tail > .72) {
+        const tailLength = radius * (1.1 + droplet.tail * 1.8);
+        const tailGradient = drawingContext.createLinearGradient(0, radius * .6, 0, tailLength);
+        tailGradient.addColorStop(0, `rgba(214, 244, 250, ${droplet.opacity * .28})`);
+        tailGradient.addColorStop(1, 'rgba(214, 244, 250, 0)');
+        drawingContext.beginPath();
+        drawingContext.moveTo(radius * .08, radius * .62);
+        drawingContext.quadraticCurveTo(radius * .2, tailLength * .62, -radius * .04, tailLength);
+        drawingContext.strokeStyle = tailGradient;
+        drawingContext.lineWidth = Math.max(1, radius * .16);
+        drawingContext.lineCap = 'round';
+        drawingContext.stroke();
+      }
+      drawingContext.restore();
+    };
+
+    const paintFilm = (arrival: number) => {
+      filmContext.setTransform(1, 0, 0, 1, 0, 0);
+      filmContext.clearRect(0, 0, filmCanvas.width, filmCanvas.height);
+      filmContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const filmGradient = filmContext.createLinearGradient(0, 0, sceneWidth, sceneHeight);
+      filmGradient.addColorStop(0, `rgba(225, 248, 252, ${.1 * arrival})`);
+      filmGradient.addColorStop(.38, `rgba(177, 222, 233, ${.055 * arrival})`);
+      filmGradient.addColorStop(.72, `rgba(244, 253, 252, ${.12 * arrival})`);
+      filmGradient.addColorStop(1, `rgba(110, 176, 193, ${.075 * arrival})`);
+      filmContext.fillStyle = filmGradient;
+      filmContext.fillRect(0, 0, sceneWidth, sceneHeight);
+
+      droplets.forEach((droplet) => paintDroplet(filmContext, droplet, arrival));
+
+      if (wipeProgress <= 0) return;
+      if (wipeProgress >= .999) {
+        filmContext.clearRect(0, 0, sceneWidth, sceneHeight);
+        return;
+      }
+
+      const softness = Math.max(42, sceneHeight * .1);
+      const sweepPosition = -sceneHeight * .74 + wipeProgress * sceneHeight * 1.56;
+      const topEdge = -sceneHeight * 1.2;
+
+      filmContext.save();
+      filmContext.globalCompositeOperation = 'destination-out';
+      filmContext.translate(sceneWidth / 2, sceneHeight / 2);
+      filmContext.rotate(-.095);
+
+      const solidHeight = Math.max(0, sweepPosition - softness - topEdge);
+      filmContext.fillStyle = '#000';
+      filmContext.fillRect(-sceneWidth, topEdge, sceneWidth * 2, solidHeight);
+
+      const softMask = filmContext.createLinearGradient(0, sweepPosition - softness, 0, sweepPosition + softness);
+      softMask.addColorStop(0, 'rgba(0, 0, 0, 1)');
+      softMask.addColorStop(.56, 'rgba(0, 0, 0, .8)');
+      softMask.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      filmContext.fillStyle = softMask;
+      filmContext.fillRect(-sceneWidth, sweepPosition - softness, sceneWidth * 2, softness * 2);
+      filmContext.restore();
+    };
+
+    const drawWipeEdge = () => {
+      if (wipeProgress <= .015 || wipeProgress >= .985) return;
+
+      const edgeY = -sceneHeight * .24 + wipeProgress * sceneHeight * 1.38;
+      context.save();
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      context.translate(sceneWidth / 2, sceneHeight / 2);
+      context.rotate(-.095);
+      const edgeGradient = context.createLinearGradient(-sceneWidth * .5, 0, sceneWidth * .5, 0);
+      edgeGradient.addColorStop(0, 'rgba(235, 252, 255, 0)');
+      edgeGradient.addColorStop(.2, 'rgba(235, 252, 255, .42)');
+      edgeGradient.addColorStop(.8, 'rgba(235, 252, 255, .32)');
+      edgeGradient.addColorStop(1, 'rgba(235, 252, 255, 0)');
+      context.strokeStyle = edgeGradient;
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(-sceneWidth * .62, edgeY);
+      context.bezierCurveTo(-sceneWidth * .2, edgeY + 8, sceneWidth * .16, edgeY - 10, sceneWidth * .62, edgeY + 2);
+      context.stroke();
+      context.restore();
+    };
+
+    const renderFilm = (time: number) => {
+      if (!hasSplashed || isDisposed) return;
+
+      const elapsed = clamp((time - splashStart) / 620, 0, 1);
+      const arrival = easeOut(elapsed);
+      paintFilm(arrival);
+
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(filmCanvas, 0, 0);
+      drawWipeEdge();
+
+      if (elapsed < 1) animationFrame = window.requestAnimationFrame(renderFilm);
+    };
+
+    const requestFilmRender = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(renderFilm);
+    };
+
+    const showSplash = () => {
+      if (isDisposed || reducedMotion.matches) return;
+      const bounds = sceneRoot.getBoundingClientRect();
+      const sceneIsVisible = bounds.bottom > 0 && bounds.top < window.innerHeight * .78;
+
+      if (!sceneIsVisible) {
+        sceneRoot.dataset.state = 'cleared';
+        sceneRoot.classList.add('is-cleared');
+        return;
+      }
+
+      hasSplashed = true;
+      splashStart = performance.now();
+      splashScrollPosition = window.scrollY;
+      sceneRoot.dataset.state = 'splashed';
+      sceneRoot.classList.add('is-splashed');
+      canvas.classList.add('is-visible');
+      requestFilmRender();
+    };
+
+    const startScene = () => {
+      if (hasStarted || reducedMotion.matches || isDisposed) return;
+      hasStarted = true;
+      sceneRoot.dataset.state = 'cleaning';
+      sceneRoot.classList.add('is-playing');
+      const splashDelay = compactScene.matches ? 4450 : 5150;
+      schedule(showSplash, splashDelay);
+    };
+
+    const handleScroll = () => {
+      if (!hasSplashed || wipeProgress >= 1 || reducedMotion.matches) return;
+      const wipeDistance = clamp(window.innerHeight * .58, 280, 560);
+      const nextProgress = clamp((window.scrollY - splashScrollPosition) / wipeDistance, 0, 1);
+      if (nextProgress <= wipeProgress) return;
+
+      wipeProgress = nextProgress;
+      sceneRoot.style.setProperty('--roof-scene-wipe-progress', wipeProgress.toFixed(3));
+      requestFilmRender();
+
+      if (wipeProgress >= .999) {
+        sceneRoot.dataset.state = 'cleared';
+        sceneRoot.classList.add('is-cleared');
+        canvas.classList.add('is-cleared');
+      }
+    };
+
+    const enableMotion = () => {
+      sceneRoot.classList.remove('is-reduced');
+      sceneRoot.classList.add('is-enhanced');
+
+      if (supportsIntersectionObserver) {
+        observer = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .32)) return;
+          observer?.disconnect();
+          startScene();
+        }, { threshold: [.32] });
+        observer.observe(sceneRoot);
+      } else {
+        animationFrame = window.requestAnimationFrame(startScene);
+      }
+    };
+
+    const disableMotion = () => {
+      observer?.disconnect();
+      clearTimers();
+      window.cancelAnimationFrame(animationFrame);
+      hasStarted = false;
+      hasSplashed = false;
+      wipeProgress = 0;
+      sceneRoot.dataset.state = 'reduced';
+      sceneRoot.classList.remove('is-enhanced', 'is-playing', 'is-splashed', 'is-cleared');
+      sceneRoot.classList.add('is-reduced');
+      canvas.classList.remove('is-visible', 'is-cleared');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    const handleMotionPreference = () => {
+      if (reducedMotion.matches) disableMotion();
+      else enableMotion();
+    };
+
+    const cleanup = () => {
+      if (isDisposed) return;
+      isDisposed = true;
+      observer?.disconnect();
+      abortController.abort();
+      clearTimers();
+      window.cancelAnimationFrame(animationFrame);
+      reducedMotion.removeEventListener('change', handleMotionPreference);
+      compactScene.removeEventListener('change', resizeCanvas);
+      canvas.remove();
+      sceneRoot.removeAttribute('data-roof-scene-ready');
+    };
+
+    resizeCanvas();
+    document.body.append(canvas);
+    window.addEventListener('resize', resizeCanvas, { passive: true, signal: abortController.signal });
+
+    window.addEventListener('scroll', handleScroll, { passive: true, signal: abortController.signal });
+    reducedMotion.addEventListener('change', handleMotionPreference);
+    compactScene.addEventListener('change', resizeCanvas);
+    document.addEventListener('astro:before-swap', cleanup, { once: true, signal: abortController.signal });
+    handleMotionPreference();
+  });
+</script>

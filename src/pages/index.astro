@@ -2,13 +2,13 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import logo from '../assets/logo.jpg';
-import heroImage from '../assets/projects/dachflaeche-moos.jpg';
 import roofDetail from '../assets/projects/dachreinigung-konstanz.jpg';
 import roofChannel from '../assets/projects/dachrinne-vorher.jpg';
 import tileRepair from '../assets/projects/dachziegel-reparatur.jpg';
 import sealingBefore from '../assets/projects/abdichtung-vorher.jpg';
 import sealingAfter from '../assets/projects/abdichtung-nachher.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import RoofCleaningScene from '../components/RoofCleaningScene.astro';
 
 const title = 'AR Holz- & Bautenschutz | Dachservice in Konstanz';
 const description = 'Holzschutz, Bautenschutz, Abdichtungsarbeiten, Kellerabdichtung, Balkonsanierung, Schimmelbeseitigung, Dachservice und Fensterreinigung in Konstanz.';
@@ -146,11 +146,7 @@ const businessData = {
       </div>
 
       <div class="hero-visual">
-        <div class="hero-image-wrap">
-          <Image src={heroImage} alt="Ziegeldach mit Moos und Laub vor den Reinigungsarbeiten" widths={[560, 760, 980]} sizes="(max-width: 880px) 100vw, 48vw" format="webp" quality={82} loading="eager" />
-          <div class="hero-image-shade"></div>
-          <span class="hero-caption">Arbeitsaufnahme · Dachpflege</span>
-        </div>
+        <RoofCleaningScene />
         <div class="owner-card">
           <Image src={logo} alt="Logo AR Holz- und Bautenschutz" width={66} height={60} format="webp" quality={85} />
           <div><span>Ihr Ansprechpartner</span><strong>Aref Razai</strong></div>
