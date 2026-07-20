@@ -86,16 +86,6 @@
   <circle cx="652" cy="98" r="118" fill="#d45f2e" opacity=".07" />
   <circle cx="652" cy="98" r="74" fill="none" stroke="#d45f2e" stroke-opacity=".16" stroke-width="1.5" />
 
-  <!-- Bodensee: Segelboot und Wellen -->
-  <g class="rs-lake" stroke-linecap="round">
-    <path d="M172 96v42" stroke="#3b3733" stroke-width="2.5" />
-    <path d="M170 98 138 134h32Z" fill="#d45f2e" opacity=".85" />
-    <path d="M176 104v30l24-6Z" fill="#3b3733" opacity=".75" />
-    <path d="M136 142q10 8 22 0t22 0q10 8 22 0" fill="none" stroke="#171715" stroke-opacity=".3" stroke-width="2.5" />
-    <path d="M118 158q10 8 22 0t22 0q10 8 22 0t22 0" fill="none" stroke="#171715" stroke-opacity=".18" stroke-width="2.5" />
-    <path d="M148 174q10 8 22 0t22 0" fill="none" stroke="#171715" stroke-opacity=".1" stroke-width="2.5" />
-  </g>
-
   <ellipse cx="400" cy="692" rx="342" ry="34" fill="#171715" opacity=".13" filter="url(#rs-soft)" />
 
   <g class="rs-house">
@@ -281,8 +271,6 @@
   .rs-smoke { stroke-dasharray: 40; animation: rs-smoke-drift 3.2s ease-out infinite; }
   .rs-smoke-2 { animation-delay: 1.4s; }
 
-  .rs-lake { animation: rs-lake-sway 7s ease-in-out infinite alternate; }
-
   @keyframes rs-reveal {
     0%, 8% { stroke-dashoffset: 100; }
     60% { stroke-dashoffset: 0; }
@@ -338,11 +326,6 @@
     0% { stroke-dashoffset: 40; opacity: 0; }
     30% { opacity: .7; }
     100% { stroke-dashoffset: -12; opacity: 0; }
-  }
-
-  @keyframes rs-lake-sway {
-    from { transform: translateX(0); }
-    to { transform: translateX(7px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
