@@ -1,8 +1,16 @@
+---
+import BodenseeMark from './BodenseeMark.astro';
+---
+
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
       <a class="footer-brand" href="/">AR Holz- &amp; Bautenschutz</a>
       <p>Holzschutz, Bautenschutz, Abdichtungen, Dachservice sowie Fenster- und Gewächshausreinigung – mit Sitz in Konstanz, im Einsatz in der ganzen Bodensee-Region.</p>
+      <div class="footer-lake">
+        <BodenseeMark />
+        <span>Konstanz · Bodensee</span>
+      </div>
     </div>
     <div>
       <span class="footer-label">Kontakt</span>
@@ -22,6 +30,33 @@
   </div>
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} AR Holz- &amp; Bautenschutz</span>
+    <span class="visit-counter" data-visit-counter hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+      <span data-count>–</span>&nbsp;Aufrufe
+    </span>
     <span>Persönlich geführt von Aref Razai</span>
   </div>
 </footer>
+
+<script>
+  const counter = document.querySelector('[data-visit-counter]');
+  const countTarget = counter?.querySelector('[data-count]');
+
+  if (counter instanceof HTMLElement && countTarget) {
+    const alreadyCounted = sessionStorage.getItem('ar-dach-counted') === '1';
+    const endpoint = alreadyCounted ? 'get' : 'hit';
+
+    fetch(`https://abacus.jasoncameron.dev/${endpoint}/ar-dach-de/visits`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        const value = typeof data.value === 'number' ? data.value : null;
+        if (value === null) return;
+        countTarget.textContent = value.toLocaleString('de-DE');
+        counter.hidden = false;
+        sessionStorage.setItem('ar-dach-counted', '1');
+      })
+      .catch(() => {
+        /* Zähler nicht erreichbar – Element bleibt ausgeblendet. */
+      });
+  }
+</script>

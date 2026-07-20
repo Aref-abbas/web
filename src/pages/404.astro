@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden | AR Holz- & Bautenschutz"
+  description="Die angeforderte Seite existiert nicht. Zurück zur Startseite von AR Holz- & Bautenschutz in Konstanz."
+  path="/404.html"
+  noindex
+>
+  <section class="legal-hero">
+    <div class="container legal-narrow">
+      <span class="section-kicker">Fehler 404</span>
+      <h1>Diese Seite gibt es nicht.</h1>
+      <p>Vielleicht wurde die Adresse falsch eingetippt oder die Seite ist umgezogen. Alles Wichtige finden Sie auf der Startseite – oder Sie melden sich direkt bei uns.</p>
+      <div class="notfound-actions">
+        <a class="button button-primary" href="/">Zur Startseite</a>
+        <a class="button button-secondary" href="/#kontakt">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero { min-height: 52vh; }
+  .notfound-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+</style>

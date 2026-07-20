@@ -10,11 +10,17 @@ import sealingAfter from '../assets/projects/abdichtung-nachher.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
 import RoofScene from '../components/RoofScene.astro';
 import GreenhouseScene from '../components/GreenhouseScene.astro';
+import BodenseeMark from '../components/BodenseeMark.astro';
+import QRCode from 'qrcode';
 
 const title = 'AR Holz- & Bautenschutz | Dach & Gebäudeschutz in Konstanz und am Bodensee';
 const description = 'Holzschutz, Bautenschutz, Abdichtung, Dachservice sowie Fenster- und Gewächshausreinigung. Persönlich ausgeführt von Aref Razai – mit Sitz in Konstanz, im Einsatz in der ganzen Bodensee-Region.';
 const whatsappUrl = `https://wa.me/491772156157?text=${encodeURIComponent('Hallo Herr Razai, ich möchte gerne eine unverbindliche Anfrage stellen.')}`;
-const whatsappQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=${encodeURIComponent(whatsappUrl)}`;
+const whatsappQrSvg = await QRCode.toString(whatsappUrl, {
+  type: 'svg',
+  margin: 1,
+  color: { dark: '#171715', light: '#ffffff' },
+});
 
 const services = [
   {
@@ -172,7 +178,7 @@ const businessData = {
         <div class="hero-photo hero-scene" aria-hidden="true">
           <RoofScene />
           <span class="scene-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3v7h-6l6-7Z" fill="currentColor"/><path d="M3 15c2.5 0 2.5 2 5 2s2.5-2 5-2 2.5 2 5 2 2.5-2 3-2M6 19.5c2 0 2 1.5 4 1.5s2-1.5 4-1.5 2 1.5 4 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <BodenseeMark dotColor="#fffdf9" />
             Zuhause am Bodensee
           </span>
         </div>
@@ -345,7 +351,7 @@ const businessData = {
           </a>
         </div>
         <a class="qr-panel" href={whatsappUrl} aria-label="WhatsApp-Chat mit AR Holz- und Bautenschutz öffnen">
-          <img src={whatsappQrUrl} alt="WhatsApp QR-Code für AR Holz- und Bautenschutz" width="220" height="220" loading="lazy" />
+          <span class="qr-panel-code" role="img" aria-label="WhatsApp QR-Code für AR Holz- und Bautenschutz" set:html={whatsappQrSvg} />
           <span class="qr-panel-copy"><strong>WhatsApp direkt öffnen</strong><span>Am Smartphone antippen oder den QR-Code am Desktop scannen.</span></span>
           <span class="qr-panel-arrow" aria-hidden="true">→</span>
         </a>
