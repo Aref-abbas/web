@@ -69,6 +69,16 @@ const whatsappUrl = `https://wa.me/491772156157?text=${encodeURIComponent('Hallo
       </a>
     </nav>
     <script>
+      // Mobile Schnellkontakt-Leiste erst zeigen, wenn der Besucher sich
+      // orientiert hat (nach dem ersten Scrollen aus dem Einstieg heraus).
+      const mobileCta = document.querySelector('.mobile-cta');
+      if (mobileCta instanceof HTMLElement) {
+        const threshold = () => window.innerHeight * 0.7;
+        const updateCta = () => mobileCta.classList.toggle('is-visible', window.scrollY > threshold());
+        window.addEventListener('scroll', updateCta, { passive: true });
+        updateCta();
+      }
+
       const revealTargets = document.querySelectorAll(
         '.section-heading, .service-card, .work-card, .sealing-copy, .sealing-comparison figure, .greenhouse-visual, .greenhouse-copy, .process-grid li, .contact-copy, .contact-card, .intro-band-inner',
       );

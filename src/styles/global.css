@@ -453,7 +453,11 @@
     background: rgba(23, 23, 21, .96);
     backdrop-filter: blur(12px);
     border-top: 1px solid rgba(255, 255, 255, .1);
+    translate: 0 110%;
+    transition: translate .35s cubic-bezier(.18, .7, .22, 1);
   }
+
+  .mobile-cta.is-visible { translate: 0 0; }
 
   .mobile-cta a {
     min-height: 50px;
