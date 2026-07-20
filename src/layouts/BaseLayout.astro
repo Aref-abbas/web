@@ -1,6 +1,11 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
 import '../styles/global.css';
 
 interface Props {
@@ -12,19 +17,24 @@ interface Props {
 
 const { title, description, path = '/', noindex = false } = Astro.props;
 const canonical = new URL(path, Astro.site);
+const whatsappUrl = `https://wa.me/491772156157?text=${encodeURIComponent('Hallo Herr Razai, ich möchte gerne eine unverbindliche Anfrage stellen.')}`;
 ---
 
 <!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="author" content="AR Holz- & Bautenschutz, Aref Razai" />
     <meta name="theme-color" content="#171715" />
+    <meta name="geo.region" content="DE-BW" />
+    <meta name="geo.placename" content="Konstanz" />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="AR Holz- & Bautenschutz" />
@@ -33,6 +43,9 @@ const canonical = new URL(path, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL('/og-cover.jpg', Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-cover.jpg', Astro.site)} />
     <title>{title}</title>
   </head>
   <body>
@@ -42,5 +55,47 @@ const canonical = new URL(path, Astro.site);
       <slot />
     </main>
     <Footer />
+    <nav class="mobile-cta" aria-label="Schnellkontakt">
+      <a class="mobile-cta-call" href="tel:+491772156157">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.4 8 7.8 9.6a15.2 15.2 0 0 0 6.6 6.6l1.6-1.6 4.5 2.2-.8 3.4c-.2.8-.9 1.3-1.7 1.3A15.5 15.5 0 0 1 2.5 6c0-.8.5-1.5 1.3-1.7l3.4-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Anrufen
+      </a>
+      <a class="mobile-cta-whatsapp" href={whatsappUrl}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.83 14.12c-.25.7-1.45 1.34-2 1.4-.51.05-1.15.07-1.86-.12-.43-.13-.98-.32-1.68-.62-2.96-1.28-4.89-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .39 0 .56.01.18.01.42-.07.66.5.25.59.84 2.04.91 2.19.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.07 1.32 2.37 1.47.3.15.47.12.64-.07.17-.2.74-.86.93-1.16.2-.3.39-.25.66-.15.27.1 1.7.8 2 .95.29.15.49.22.56.35.07.12.07.72-.18 1.41Z" fill="currentColor"/></svg>
+        WhatsApp
+      </a>
+    </nav>
+    <script>
+      const revealTargets = document.querySelectorAll(
+        '.section-heading, .service-card, .work-card, .sealing-copy, .sealing-comparison figure, .greenhouse-visual, .greenhouse-copy, .process-grid li, .contact-copy, .contact-card, .intro-band-inner',
+      );
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      if (!reducedMotion.matches && 'IntersectionObserver' in window && revealTargets.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -36px' },
+        );
+
+        let groupParent: Element | null = null;
+        let groupIndex = 0;
+        revealTargets.forEach((element) => {
+          if (element.parentElement !== groupParent) {
+            groupParent = element.parentElement;
+            groupIndex = 0;
+          }
+          (element as HTMLElement).style.setProperty('--reveal-delay', `${Math.min(groupIndex, 5) * 70}ms`);
+          groupIndex += 1;
+          element.classList.add('will-reveal');
+          observer.observe(element);
+        });
+      }
+    </script>
   </body>
 </html>

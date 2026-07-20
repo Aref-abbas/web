@@ -1,0 +1,336 @@
+---
+// Animierte Gewächshaus-Szene: ein Abzieher reinigt die Glasflächen in Bahnen.
+// Hinter dem klaren Glas werden die Pflanzen wieder sichtbar, warmes Licht
+// fällt ins Haus. Reine CSS-Animation, kein JavaScript.
+---
+
+<svg
+  class="greenhouse-scene"
+  viewBox="0 0 800 640"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="gs-paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf6ef" />
+      <stop offset=".55" stop-color="#f0e8db" />
+      <stop offset="1" stop-color="#e2d6c5" />
+    </linearGradient>
+    <linearGradient id="gs-glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3f2f4" stop-opacity=".32" />
+      <stop offset="1" stop-color="#c2dde1" stop-opacity=".18" />
+    </linearGradient>
+    <linearGradient id="gs-grime" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a0ad84" />
+      <stop offset="1" stop-color="#828f6d" />
+    </linearGradient>
+    <linearGradient id="gs-light" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f9d795" stop-opacity=".55" />
+      <stop offset="1" stop-color="#f9d795" stop-opacity="0" />
+    </linearGradient>
+
+    <clipPath id="gs-glass-clip">
+      <path d="M158 296 400 122l242 174v242H158Z" />
+    </clipPath>
+
+    <mask id="gs-clean-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
+      <rect width="800" height="640" fill="#000" />
+      <path
+        class="gs-reveal-stroke"
+        d="M310 190 H500 Q548 190 548 238 V244 Q548 292 500 292 H210 Q162 292 162 340 V346 Q162 394 210 394 H590 Q638 394 638 442 V448 Q638 496 590 496 H150"
+        pathLength="100"
+        fill="none"
+        stroke="#fff"
+        stroke-width="106"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <rect class="gs-mask-fill" width="800" height="640" fill="#fff" />
+    </mask>
+
+    <mask id="gs-grime-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
+      <rect width="800" height="640" fill="#fff" />
+      <path
+        class="gs-grime-stroke"
+        d="M310 190 H500 Q548 190 548 238 V244 Q548 292 500 292 H210 Q162 292 162 340 V346 Q162 394 210 394 H590 Q638 394 638 442 V448 Q638 496 590 496 H150"
+        pathLength="100"
+        fill="none"
+        stroke="#000"
+        stroke-width="106"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <rect class="gs-grime-fill" width="800" height="640" fill="#000" />
+    </mask>
+
+    <filter id="gs-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" />
+    </filter>
+  </defs>
+
+  <!-- Hintergrund -->
+  <rect width="800" height="640" fill="url(#gs-paper)" />
+  <g stroke="#171715" stroke-opacity=".045" stroke-width="1">
+    <path d="M100 0V640M200 0V640M300 0V640M400 0V640M500 0V640M600 0V640M700 0V640" />
+    <path d="M0 100H800M0 200H800M0 300H800M0 400H800M0 500H800" />
+  </g>
+  <circle cx="128" cy="96" r="96" fill="#d45f2e" opacity=".07" />
+  <circle cx="128" cy="96" r="60" fill="none" stroke="#d45f2e" stroke-opacity=".16" stroke-width="1.5" />
+
+  <ellipse cx="400" cy="592" rx="330" ry="30" fill="#171715" opacity=".13" filter="url(#gs-soft)" />
+
+  <!-- Innenraum: Beet, Töpfe und Pflanzen -->
+  <g clip-path="url(#gs-glass-clip)">
+    <rect x="158" y="122" width="484" height="416" fill="#f4ede0" />
+    <rect x="158" y="486" width="484" height="52" rx="4" fill="#8a6b4f" />
+    <path d="M158 492h484" stroke="#6f5540" stroke-width="3" stroke-opacity=".5" />
+
+    <!-- Lichteinfall nach der Reinigung -->
+    <path class="gs-lightbeam" d="M400 128 258 538h284Z" fill="url(#gs-light)" />
+
+    <g class="gs-plants">
+      <!-- Hochgewachsene Pflanze links -->
+      <path d="M252 486V336" stroke="#5c744a" stroke-width="6" stroke-linecap="round" />
+      <path d="M252 372c-24-6-36-22-38-44 22 4 34 18 38 44ZM252 412c24-6 36-22 38-44-22 4-34 18-38 44ZM252 448c-22-5-33-19-35-38 20 3 31 16 35 38Z" fill="#6d8b57" />
+      <circle cx="266" cy="352" r="7" fill="#c8502e" />
+      <circle cx="242" cy="384" r="6" fill="#c8502e" />
+      <rect x="222" y="486" width="60" height="46" rx="5" fill="#b96b45" />
+      <rect x="216" y="478" width="72" height="14" rx="5" fill="#a25836" />
+
+      <!-- Mittlere Pflanzen -->
+      <path d="M368 486v-96" stroke="#5c744a" stroke-width="5" stroke-linecap="round" />
+      <path d="M368 414c-18-5-28-16-30-33 17 3 26 14 30 33ZM368 448c18-5 28-16 30-33-17 3-26 14-30 33Z" fill="#7a9662" />
+      <rect x="342" y="486" width="52" height="40" rx="5" fill="#b96b45" />
+      <rect x="337" y="479" width="62" height="12" rx="5" fill="#a25836" />
+
+      <path d="M462 486v-72" stroke="#5c744a" stroke-width="5" stroke-linecap="round" />
+      <path d="M462 438c-16-4-25-14-27-29 15 3 23 12 27 29ZM462 466c16-4 25-14 27-29-15 3-23 12-27 29Z" fill="#6d8b57" />
+      <rect x="438" y="486" width="48" height="38" rx="5" fill="#b96b45" />
+      <rect x="433" y="479" width="58" height="12" rx="5" fill="#a25836" />
+
+      <!-- Buschige Pflanze rechts -->
+      <ellipse cx="574" cy="452" rx="46" ry="38" fill="#7a9662" />
+      <ellipse cx="552" cy="432" rx="24" ry="20" fill="#8aa671" />
+      <ellipse cx="596" cy="428" rx="20" ry="17" fill="#6d8b57" />
+      <rect x="546" y="486" width="56" height="44" rx="5" fill="#b96b45" />
+      <rect x="540" y="478" width="68" height="14" rx="5" fill="#a25836" />
+    </g>
+  </g>
+
+  <!-- Schmutzfilm auf dem Glas -->
+  <g class="gs-grime-layer" clip-path="url(#gs-glass-clip)" mask="url(#gs-grime-mask)">
+    <rect x="158" y="122" width="484" height="416" fill="url(#gs-grime)" opacity=".9" />
+    <path d="M226 250v240M306 200v320M414 170v360M508 214v300M586 268v240" stroke="#7e8f6b" stroke-opacity=".55" stroke-width="16" filter="url(#gs-soft)" />
+    <path d="M258 300v200M356 240v280M470 220v300M556 300v220" stroke="#c3cfae" stroke-opacity=".4" stroke-width="7" filter="url(#gs-soft)" />
+    <ellipse cx="270" cy="280" rx="34" ry="12" fill="#75855c" opacity=".4" />
+    <ellipse cx="470" cy="330" rx="40" ry="13" fill="#75855c" opacity=".35" />
+    <ellipse cx="580" cy="420" rx="30" ry="11" fill="#75855c" opacity=".38" />
+  </g>
+
+  <!-- Sauberes Glas, wird durch die Reinigungsbahn freigelegt -->
+  <g class="gs-clean-layer" clip-path="url(#gs-glass-clip)" mask="url(#gs-clean-mask)">
+    <path d="M158 296 400 122l242 174v242H158Z" fill="url(#gs-glass)" />
+    <path d="M228 470 402 178M290 480 452 208" stroke="#ffffff" stroke-opacity=".4" stroke-width="9" stroke-linecap="round" filter="url(#gs-soft)" />
+  </g>
+
+  <!-- Konstruktion: Rahmen, Sprossen, Tür -->
+  <g fill="none" stroke="#4c463d" stroke-linejoin="round">
+    <path d="M238 238v300M319 180v358M481 180v358M562 238v300" stroke-width="5" stroke-opacity=".85" />
+    <path d="M158 296h484M158 394h484M158 470h484" stroke-width="5" stroke-opacity=".85" />
+    <path d="M158 296 400 122l242 174v242H158Z" stroke-width="11" />
+    <path d="M400 122v416" stroke-width="5" stroke-opacity=".85" />
+  </g>
+  <g>
+    <rect x="364" y="386" width="72" height="152" rx="4" fill="none" stroke="#4c463d" stroke-width="8" />
+    <circle cx="422" cy="464" r="5" fill="#4c463d" />
+  </g>
+  <path d="M140 538h520" stroke="#4c463d" stroke-width="12" stroke-linecap="round" />
+
+  <!-- Firstlüftung -->
+  <path d="M382 108h36" stroke="#4c463d" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Abzieher, folgt der Reinigungsbahn -->
+  <g class="gs-tool">
+    <g class="gs-tool-art">
+      <ellipse cx="0" cy="0" rx="40" ry="34" fill="#cdeef7" opacity=".32" filter="url(#gs-soft)" />
+      <rect x="-34" y="-6" width="68" height="10" rx="5" fill="#2e2a26" />
+      <rect x="-34" y="-9" width="68" height="6" rx="3" fill="#d45f2e" />
+      <path d="M0 4 L26 64" stroke="#8f8a82" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 50 L36 88" stroke="#2e2a26" stroke-width="13" stroke-linecap="round" />
+      <g class="gs-tool-drops">
+        <circle cx="-18" cy="16" r="4" fill="#9fd4e8" />
+        <circle cx="4" cy="22" r="3.2" fill="#bfe4f0" />
+        <circle cx="16" cy="14" r="2.8" fill="#9fd4e8" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Tropfen am Sockel -->
+  <g class="gs-drips">
+    <path class="gs-drip gs-drip-1" d="M250 546c0 5 7 7 7 12a7 7 0 1 1-14 0c0-5 7-7 7-12Z" fill="#9fd4e8" opacity=".85" />
+    <path class="gs-drip gs-drip-2" d="M430 546c0 5 7 7 7 12a7 7 0 1 1-14 0c0-5 7-7 7-12Z" fill="#9fd4e8" opacity=".85" />
+    <path class="gs-drip gs-drip-3" d="M560 546c0 5 7 7 7 12a7 7 0 1 1-14 0c0-5 7-7 7-12Z" fill="#9fd4e8" opacity=".85" />
+  </g>
+
+  <!-- Glanzpunkte -->
+  <g class="gs-sparkles" fill="#fff8ef">
+    <path class="gs-sparkle gs-sparkle-1" d="M282 236l3.5 10 10 3.5-10 3.5-3.5 10-3.5-10-10-3.5 10-3.5Z" />
+    <path class="gs-sparkle gs-sparkle-2" d="M528 260l3 9 9 3-9 3-3 9-3-9-9-3 9-3Z" />
+    <path class="gs-sparkle gs-sparkle-3" d="M216 428l3 9 9 3-9 3-3 9-3-9-9-3 9-3Z" />
+    <path class="gs-sparkle gs-sparkle-4" d="M604 330l3.5 10 10 3.5-10 3.5-3.5 10-3.5-10-10-3.5 10-3.5Z" />
+  </g>
+</svg>
+
+<style>
+  .greenhouse-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Master-Zyklus: 13s, leicht versetzt zur Dach-Szene. */
+  .gs-reveal-stroke {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: gs-reveal 13s linear infinite;
+  }
+
+  .gs-clean-layer { animation: gs-clean-window 13s linear infinite; }
+
+  .gs-grime-stroke {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: gs-grime-reveal 13s linear infinite;
+  }
+
+  .gs-lightbeam { opacity: 0; animation: gs-light-window 13s linear infinite; }
+
+  /* Nach der letzten Bahn decken die Vollflächen auch die Kurven-Ecken ab. */
+  .gs-mask-fill {
+    opacity: 0;
+    animation: gs-mask-fill 13s linear infinite;
+  }
+
+  .gs-grime-fill {
+    opacity: 0;
+    animation: gs-grime-fill 13s linear infinite;
+  }
+
+  @keyframes gs-mask-fill {
+    0%, 56% { opacity: 0; }
+    62%, 100% { opacity: 1; }
+  }
+
+  @keyframes gs-grime-fill {
+    0%, 56% { opacity: 0; }
+    62%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+  }
+
+  .gs-tool {
+    offset-path: path('M310 190 H500 Q548 190 548 238 V244 Q548 292 500 292 H210 Q162 292 162 340 V346 Q162 394 210 394 H590 Q638 394 638 442 V448 Q638 496 590 496 H150');
+    offset-rotate: 0deg;
+    animation: gs-tool-travel 13s linear infinite;
+  }
+
+  @supports not (offset-path: path('M0 0L1 1')) {
+    .gs-tool { display: none; }
+  }
+
+  .gs-tool-art { animation: gs-tool-bob 1s ease-in-out infinite alternate; }
+  .gs-tool-drops circle { animation: gs-drop-fall 0.9s ease-in infinite; }
+  .gs-tool-drops circle:nth-child(2) { animation-delay: .3s; }
+  .gs-tool-drops circle:nth-child(3) { animation-delay: .6s; }
+
+  .gs-drips { animation: gs-drips-window 13s linear infinite; }
+  .gs-drip { animation: gs-drip-fall 1.6s ease-in infinite; }
+  .gs-drip-2 { animation-delay: .5s; }
+  .gs-drip-3 { animation-delay: 1s; }
+
+  .gs-sparkles { animation: gs-sparkles-window 13s linear infinite; }
+  .gs-sparkle { transform-box: fill-box; transform-origin: center; animation: gs-twinkle 2.4s ease-in-out infinite; }
+  .gs-sparkle-2 { animation-delay: .5s; }
+  .gs-sparkle-3 { animation-delay: 1s; }
+  .gs-sparkle-4 { animation-delay: 1.6s; }
+
+  @keyframes gs-reveal {
+    0%, 8% { stroke-dashoffset: 100; }
+    58% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  @keyframes gs-clean-window {
+    0%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+  }
+
+  /* Der schwarze Maskenstrich legt den Schmutzfilm frei; zum Zyklusende
+     blendet er aus, sodass der Schmutz weich zurückkehrt. */
+  @keyframes gs-grime-reveal {
+    0%, 8% { stroke-dashoffset: 100; opacity: 1; }
+    58% { stroke-dashoffset: 0; opacity: 1; }
+    88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+
+  @keyframes gs-light-window {
+    0%, 56% { opacity: 0; }
+    64%, 86% { opacity: 1; }
+    94%, 100% { opacity: 0; }
+  }
+
+  @keyframes gs-tool-travel {
+    0%, 8% { offset-distance: 0%; opacity: 0; }
+    10.5% { opacity: 1; }
+    56% { opacity: 1; }
+    58% { offset-distance: 100%; opacity: 0; }
+    100% { offset-distance: 100%; opacity: 0; }
+  }
+
+  @keyframes gs-tool-bob {
+    from { transform: translateY(-2px); }
+    to { transform: translateY(2px); }
+  }
+
+  @keyframes gs-drop-fall {
+    0% { transform: translateY(0); opacity: 0; }
+    25% { opacity: .9; }
+    100% { transform: translateY(28px); opacity: 0; }
+  }
+
+  @keyframes gs-drips-window {
+    0%, 12% { opacity: 0; }
+    16%, 58% { opacity: 1; }
+    64%, 100% { opacity: 0; }
+  }
+
+  @keyframes gs-drip-fall {
+    0% { transform: translateY(0); opacity: 0; }
+    18% { opacity: .9; }
+    100% { transform: translateY(44px); opacity: 0; }
+  }
+
+  @keyframes gs-sparkles-window {
+    0%, 26% { opacity: 0; }
+    32%, 86% { opacity: 1; }
+    92%, 100% { opacity: 0; }
+  }
+
+  @keyframes gs-twinkle {
+    0%, 100% { opacity: 0; transform: scale(.4) rotate(0deg); }
+    50% { opacity: .95; transform: scale(1) rotate(20deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .greenhouse-scene *, .greenhouse-scene { animation: none !important; }
+    .gs-reveal-stroke { stroke-dashoffset: 44; }
+    .gs-grime-stroke { stroke-dashoffset: 44; }
+    .gs-tool { display: none; }
+    .gs-drips { opacity: 0; }
+    .gs-sparkles { opacity: 1; }
+    .gs-sparkle { opacity: .8; transform: none; }
+    .gs-lightbeam { opacity: .7; }
+  }
+</style>

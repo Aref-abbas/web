@@ -8,10 +8,11 @@ import tileRepair from '../assets/projects/dachziegel-reparatur.jpg';
 import sealingBefore from '../assets/projects/abdichtung-vorher.jpg';
 import sealingAfter from '../assets/projects/abdichtung-nachher.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
-import RoofCleaningScene from '../components/RoofCleaningScene.astro';
+import RoofScene from '../components/RoofScene.astro';
+import GreenhouseScene from '../components/GreenhouseScene.astro';
 
-const title = 'AR Holz- & Bautenschutz | Dachservice in Konstanz';
-const description = 'Holzschutz, Bautenschutz, Abdichtungsarbeiten, Kellerabdichtung, Balkonsanierung, Schimmelbeseitigung, Dachservice und Fensterreinigung in Konstanz.';
+const title = 'AR Holz- & Bautenschutz | Dach & Gebäudeschutz in Konstanz und am Bodensee';
+const description = 'Holzschutz, Bautenschutz, Abdichtung, Dachservice sowie Fenster- und Gewächshausreinigung. Persönlich ausgeführt von Aref Razai – mit Sitz in Konstanz, im Einsatz in der ganzen Bodensee-Region.';
 const whatsappUrl = `https://wa.me/491772156157?text=${encodeURIComponent('Hallo Herr Razai, ich möchte gerne eine unverbindliche Anfrage stellen.')}`;
 const whatsappQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=${encodeURIComponent(whatsappUrl)}`;
 
@@ -90,6 +91,12 @@ const services = [
   },
   {
     number: '13',
+    title: 'Gewächshausreinigung',
+    text: 'Glasflächen innen und außen von Hand gereinigt – auch dort, wo Reinigungsmaschinen nicht arbeiten können.',
+    icon: '<path d="M12 3 4 8.5V21h16V8.5L12 3ZM4 8.5h16M8 21V9.8M16 21V9.8M4 15h16"/>',
+  },
+  {
+    number: '14',
     title: 'Fensterreinigung',
     text: 'Reinigung von Fenstern, Glasflächen und Rahmen als ergänzender Service am Objekt.',
     icon: '<path d="M5 4h14v16H5V4Zm7 0v16M5 12h14"/>',
@@ -100,8 +107,10 @@ const businessData = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
   name: 'AR Holz- & Bautenschutz',
+  description,
   founder: 'Aref Razai',
   url: 'https://www.ar-dach.de/',
+  image: 'https://www.ar-dach.de/og-cover.jpg',
   telephone: '+49 177 2156157',
   email: 'AR.Holzschutz@web.de',
   address: {
@@ -109,11 +118,25 @@ const businessData = {
     streetAddress: 'Bücklestraße 9 A',
     postalCode: '78467',
     addressLocality: 'Konstanz',
+    addressRegion: 'Baden-Württemberg',
     addressCountry: 'DE',
   },
-  areaServed: {
-    '@type': 'City',
-    name: 'Konstanz',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 47.6721,
+    longitude: 9.1695,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Konstanz' },
+    { '@type': 'AdministrativeArea', name: 'Bodensee-Region' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Leistungen',
+    itemListElement: services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: service.title, description: service.text },
+    })),
   },
 };
 ---
@@ -124,9 +147,9 @@ const businessData = {
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow"><span></span> Holz- &amp; Bautenschutz in Konstanz</div>
+        <div class="eyebrow"><span></span> Holz- &amp; Bautenschutz am Bodensee</div>
         <h1>Holzschutz, Bautenschutz und Abdichtung <em>aus Konstanz.</em></h1>
-        <p class="hero-lead">AR Holz- &amp; Bautenschutz ist Ihr Ansprechpartner für Abdichtungen, Feuchtigkeitsschutz, Schimmelbeseitigung, Dach- und Flachdacharbeiten, Balkonsanierung sowie Fensterreinigung. Persönlich ausgeführt, klar abgestimmt und direkt erreichbar.</p>
+        <p class="hero-lead">Wir kümmern uns um Abdichtung, Feuchtigkeitsschutz, Schimmelbeseitigung, Dach- und Balkonsanierung – bis hin zur Reinigung von Fenstern und Gewächshäusern. Persönlich ausgeführt von Aref Razai: zu Hause in Konstanz, unterwegs in der ganzen Bodensee-Region.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="tel:+491772156157">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.4 8 7.8 9.6a15.2 15.2 0 0 0 6.6 6.6l1.6-1.6 4.5 2.2-.8 3.4c-.2.8-.9 1.3-1.7 1.3A15.5 15.5 0 0 1 2.5 6c0-.8.5-1.5 1.3-1.7l3.4-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -139,14 +162,20 @@ const businessData = {
           <a class="button button-tertiary" href="mailto:AR.Holzschutz@web.de?subject=Anfrage%20über%20ar-dach.de">E-Mail</a>
         </div>
         <div class="hero-facts" aria-label="Unternehmensmerkmale">
-          <div><strong>Direkt</strong><span>ein Ansprechpartner</span></div>
-          <div><strong>Vor Ort</strong><span>Sitz in Konstanz</span></div>
-          <div><strong>Breit</strong><span>13 Leistungen</span></div>
+          <div><strong>Handwerkskammer Konstanz</strong><span>eingetragener Betrieb</span></div>
+          <div><strong>Konstanz &amp; Bodensee</strong><span>in der ganzen Region im Einsatz</span></div>
+          <div><strong>Ein Ansprechpartner</strong><span>von der Anfrage bis zur Ausführung</span></div>
         </div>
       </div>
 
       <div class="hero-visual">
-        <RoofCleaningScene />
+        <div class="hero-photo hero-scene" aria-hidden="true">
+          <RoofScene />
+          <span class="scene-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3v7h-6l6-7Z" fill="currentColor"/><path d="M3 15c2.5 0 2.5 2 5 2s2.5-2 5-2 2.5 2 5 2 2.5-2 3-2M6 19.5c2 0 2 1.5 4 1.5s2-1.5 4-1.5 2 1.5 4 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Zuhause am Bodensee
+          </span>
+        </div>
         <div class="owner-card">
           <Image src={logo} alt="Logo AR Holz- und Bautenschutz" width={66} height={60} format="webp" quality={85} />
           <div><span>Ihr Ansprechpartner</span><strong>Aref Razai</strong></div>
@@ -157,7 +186,7 @@ const businessData = {
 
   <section class="intro-band">
     <div class="container intro-band-inner">
-      <p>Von Holzschutz bis Fensterreinigung: klare Leistungen für trockene, saubere und geschützte Gebäudeteile.</p>
+      <p>Vom Dachfirst bis zum Keller: Wir schützen, dichten ab und pflegen – damit Ihr Gebäude trocken bleibt und gepflegt aussieht.</p>
       <a href="#leistungen">Leistungen ansehen <span aria-hidden="true">↓</span></a>
     </div>
   </section>
@@ -169,7 +198,7 @@ const businessData = {
           <span class="section-kicker">Leistungen</span>
           <h2>Was wir für Sie übernehmen.</h2>
         </div>
-        <p>Die gewünschte Leistungsliste ist vollständig eingebunden – kompakt, auffindbar und so formuliert, dass Besucher schnell den passenden Einsatzbereich finden.</p>
+        <p>Vierzehn Leistungen, ein Ansprechpartner: Diese Arbeiten übernehmen wir für Hausbesitzer, Verwaltungen und Betriebe rund um den Bodensee.</p>
       </div>
       <div class="services-grid">
         {services.map((service) => (
@@ -183,6 +212,10 @@ const businessData = {
           </article>
         ))}
       </div>
+      <div class="services-followup">
+        <p>Ihre Aufgabe ist nicht dabei? Rufen Sie kurz an – wir sagen Ihnen ehrlich, ob sie zu uns passt oder wer Ihnen besser weiterhilft.</p>
+        <a href="tel:+491772156157">Kurz durchrufen <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -190,22 +223,22 @@ const businessData = {
     <div class="container">
       <div class="section-heading work-heading">
         <span class="section-kicker light">Einblicke in die Arbeit</span>
-        <h2>Echte Aufnahmen.<br />Sauber eingeordnet.</h2>
-        <p>Die Bilder zeigen Ausgangslagen und laufende Arbeiten an Dächern in der Region. Keine Katalogbilder, keine erfundenen Vorher-Nachher-Versprechen.</p>
+        <h2>Mitten in der Arbeit.</h2>
+        <p>Diese Aufnahmen stammen direkt von unseren Einsätzen an Dächern rund um den Bodensee – vom ersten Blick auf die Ausgangslage bis zur laufenden Ausführung.</p>
       </div>
 
       <div class="work-grid">
         <figure class="work-card work-card-large">
           <Image src={roofDetail} alt="Ziegeldach mit Moos und Ablagerungen vor der Reinigung" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 60vw" format="webp" quality={80} />
-          <figcaption><span>01</span><div><strong>Dachpflege</strong><small>Ausgangslage vor der Reinigung</small></div></figcaption>
+          <figcaption><span>01</span><div><strong>Dachreinigung</strong><small>Ausgangslage: Moos und Ablagerungen</small></div></figcaption>
         </figure>
         <figure class="work-card">
           <Image src={roofChannel} alt="Verschmutzter Dachanschluss vor den Reinigungsarbeiten" widths={[420, 620, 800]} sizes="(max-width: 760px) 100vw, 38vw" format="webp" quality={80} />
-          <figcaption><span>02</span><div><strong>Randbereiche</strong><small>Arbeitsbereich vor der Säuberung</small></div></figcaption>
+          <figcaption><span>02</span><div><strong>Dachrinne &amp; Ränder</strong><small>Vor der Säuberung</small></div></figcaption>
         </figure>
         <figure class="work-card work-card-wide">
           <Image src={tileRepair} alt="Ziegeldach während kleiner Reparaturarbeiten" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 58vw" format="webp" quality={80} />
-          <figcaption><span>03</span><div><strong>Kleine Reparaturen</strong><small>Arbeitsaufnahme während der Ausführung</small></div></figcaption>
+          <figcaption><span>03</span><div><strong>Ziegelreparatur</strong><small>Während der Ausführung</small></div></figcaption>
         </figure>
       </div>
     </div>
@@ -216,12 +249,12 @@ const businessData = {
       <div class="sealing-copy">
         <span class="section-kicker">Detailabdichtung</span>
         <h2>Der Unterschied steckt im Anschluss.</h2>
-        <p>Bei Übergängen an Türen und Bauteilen kommt es auf Vorbereitung und saubere Anschlüsse an. Diese Aufnahmen dokumentieren eine ausgeführte Detailabdichtung.</p>
+        <p>Ob Türanschluss, Balkon oder Kellerwand: Dicht wird es erst, wenn Untergrund, Vorbereitung und Ausführung zusammenpassen. Diese Aufnahmen zeigen eine von uns ausgeführte Detailabdichtung.</p>
         <ul class="check-list">
           <li><span>✓</span> Untergrund und Anschluss prüfen</li>
           <li><span>✓</span> Arbeitsbereich sorgfältig vorbereiten</li>
           <li><span>✓</span> Abdichtung im Detail ausführen</li>
-          <li><span>✓</span> Dach, Flachdach, Balkon, Keller oder Mauerwerk einordnen</li>
+          <li><span>✓</span> Lösung passend zu Dach, Balkon, Keller oder Mauerwerk</li>
         </ul>
       </div>
       <div class="sealing-comparison">
@@ -233,6 +266,33 @@ const businessData = {
           <Image src={sealingAfter} alt="Fertig ausgeführte Abdichtung an einem Türanschluss" widths={[380, 560]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
           <figcaption>Ausführung</figcaption>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section greenhouse-section" id="gewaechshaus">
+    <div class="container greenhouse-grid">
+      <div class="greenhouse-visual">
+        <div class="greenhouse-card" aria-hidden="true">
+          <GreenhouseScene />
+          <span class="scene-badge scene-badge-inset">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 8.5V21h16V8.5L12 3ZM4 8.5h16M8 21V9.8M16 21V9.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Innen- &amp; Außenreinigung
+          </span>
+        </div>
+      </div>
+      <div class="greenhouse-copy">
+        <span class="section-kicker">Spezialgebiet Glas</span>
+        <h2>Gewächshäuser: klares Glas, volles Licht.</h2>
+        <p>Algen, Kalk und Staub auf dem Glas kosten Ihre Pflanzen spürbar Licht. Große Anlagen werden heute maschinell gereinigt – doch viele Gewächshäuser erreichen diese Maschinen gar nicht: zu klein, zu verwinkelt oder schlicht zu alt.</p>
+        <p>Genau dort kommen wir zum Einsatz. Wir reinigen Dach- und Seitenflächen von Hand, innen wie außen – gründlich und zugleich schonend zu Glas, Rahmen und Bepflanzung.</p>
+        <ul class="check-list">
+          <li><span>✓</span> Glasflächen innen und außen</li>
+          <li><span>✓</span> Von Hand – auch dort, wo Maschinen nicht hinkommen</li>
+          <li><span>✓</span> Geeignet für ältere und kleinere Gewächshäuser</li>
+          <li><span>✓</span> Schonend zu Dichtungen, Rahmen und Pflanzen</li>
+        </ul>
+        <a class="text-link greenhouse-link" href="#kontakt">Unverbindlich anfragen <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -268,7 +328,7 @@ const businessData = {
       <div class="contact-copy">
         <span class="section-kicker light">Direkter Kontakt</span>
         <h2>Was ist bei Ihnen zu tun?</h2>
-        <p>Eine kurze Beschreibung und ein bis drei Fotos genügen für den ersten Kontakt. Aref Razai meldet sich persönlich zurück – per Telefon, E-Mail oder WhatsApp.</p>
+        <p>Eine kurze Beschreibung und ein bis drei Fotos genügen für den ersten Kontakt. Aref Razai meldet sich persönlich zurück – egal, ob Sie in Konstanz oder anderswo am Bodensee zu Hause sind.</p>
         <div class="contact-actions">
           <a class="contact-action contact-action-whatsapp" href={whatsappUrl}>
             <span class="contact-icon"><WhatsAppIcon /></span>
