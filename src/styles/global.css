@@ -369,6 +369,7 @@
   .work-heading { max-width: 760px; margin-bottom: 54px; }
   .work-heading p { max-width: 640px; margin-top: 24px; color: #aaa69e; }
   .work-grid { display: grid; grid-template-columns: 1.45fr .85fr; gap: 18px; }
+  .work-grid-flip { grid-template-columns: .85fr 1.45fr; margin-top: 18px; }
   .work-card { position: relative; height: 440px; overflow: hidden; border-radius: 7px; background: #2a2926; }
   .work-card-large { height: 560px; }
   .work-card-wide { grid-column: 1 / -1; height: 440px; }

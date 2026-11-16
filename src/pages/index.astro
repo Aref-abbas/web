@@ -2,11 +2,13 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import logo from '../assets/logo.jpg';
-import roofDetail from '../assets/projects/dachreinigung-konstanz.jpg';
-import roofChannel from '../assets/projects/dachrinne-vorher.jpg';
-import tileRepair from '../assets/projects/dachziegel-reparatur.jpg';
-import sealingBefore from '../assets/projects/abdichtung-vorher.jpg';
-import sealingAfter from '../assets/projects/abdichtung-nachher.jpg';
+import roofBefore from '../assets/projects/dachreinigung-ausgangslage.jpg';
+import roofMoss from '../assets/projects/moos-dachflaeche.jpg';
+import tileRoof from '../assets/projects/ziegeldach-reinigung.jpg';
+import balconyEdge from '../assets/projects/balkon-kupfereinfassung.jpg';
+import gravelRoof from '../assets/projects/flachdach-kies.jpg';
+import flatRoofSealing from '../assets/projects/flachdach-abdichtung.jpg';
+import gutterSealing from '../assets/projects/dachrinne-abdichtung.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
 import RoofScene from '../components/RoofScene.astro';
 import GreenhouseScene from '../components/GreenhouseScene.astro';
@@ -85,24 +87,30 @@ const services = [
   },
   {
     number: '11',
+    title: 'Dachfenster',
+    text: 'Ein- und Ausbau von Dachfenstern – mit sauberem Anschluss und dichtem Übergang zur Dachfläche.',
+    icon: '<path d="M3 11.5 12 4l9 7.5M8.5 10.5h7v8h-7zM12 10.5v8M8.5 14.5h7"/>',
+  },
+  {
+    number: '12',
     title: 'Dachrinnenreinigung',
     text: 'Entfernung von Laub, Moos und Schmutz aus Dachrinnen und Ablaufbereichen.',
     icon: '<path d="M4 6h16M5 6l1.5 12h11L19 6M8 10h8M9 14h6"/>',
   },
   {
-    number: '12',
+    number: '13',
     title: 'Sanierungsarbeiten',
     text: 'Kleinere Sanierungs- und Reparaturarbeiten werden transparent besprochen und ausgeführt.',
     icon: '<path d="m14 5 5 5M13 6l2-2 5 5-2 2M12 7 4 15l-1 5 5-1 8-8M5 15l4 4"/>',
   },
   {
-    number: '13',
+    number: '14',
     title: 'Gewächshausreinigung',
     text: 'Glasflächen innen und außen von Hand gereinigt – auch dort, wo Reinigungsmaschinen nicht arbeiten können.',
     icon: '<path d="M12 3 4 8.5V21h16V8.5L12 3ZM4 8.5h16M8 21V9.8M16 21V9.8M4 15h16"/>',
   },
   {
-    number: '14',
+    number: '15',
     title: 'Fensterreinigung',
     text: 'Reinigung von Fenstern, Glasflächen und Rahmen als ergänzender Service am Objekt.',
     icon: '<path d="M5 4h14v16H5V4Zm7 0v16M5 12h14"/>',
@@ -155,7 +163,7 @@ const businessData = {
       <div class="hero-copy">
         <div class="eyebrow"><span></span> Holz- &amp; Bautenschutz am Bodensee</div>
         <h1>Holzschutz, Bautenschutz und Abdichtung <em>aus Konstanz.</em></h1>
-        <p class="hero-lead">Wir kümmern uns um Abdichtung, Feuchtigkeitsschutz, Schimmelbeseitigung, Dach- und Balkonsanierung – bis hin zur Reinigung von Fenstern und Gewächshäusern. Persönlich ausgeführt von Aref Razai: zu Hause in Konstanz, unterwegs in der ganzen Bodensee-Region.</p>
+        <p class="hero-lead">Wir kümmern uns um Abdichtung, Feuchtigkeitsschutz, Schimmelbeseitigung, Dach- und Balkonsanierung, den Ein- und Ausbau von Dachfenstern – bis hin zur Reinigung von Fenstern und Gewächshäusern. Persönlich ausgeführt von Aref Razai: zu Hause in Konstanz, unterwegs in der ganzen Bodensee-Region.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#leistungen">
             Unsere Leistungen
@@ -201,7 +209,7 @@ const businessData = {
           <span class="section-kicker">Leistungen</span>
           <h2>Was wir für Sie übernehmen.</h2>
         </div>
-        <p>Vierzehn Leistungen, ein Ansprechpartner: Diese Arbeiten übernehmen wir für Hausbesitzer, Verwaltungen und Betriebe rund um den Bodensee.</p>
+        <p>Fünfzehn Leistungen, ein Ansprechpartner: Diese Arbeiten übernehmen wir für Hausbesitzer, Verwaltungen und Betriebe rund um den Bodensee.</p>
       </div>
       <div class="services-grid">
         {services.map((service) => (
@@ -227,21 +235,31 @@ const businessData = {
       <div class="section-heading work-heading">
         <span class="section-kicker light">Einblicke in die Arbeit</span>
         <h2>Mitten in der Arbeit.</h2>
-        <p>Diese Aufnahmen stammen direkt von unseren Einsätzen an Dächern rund um den Bodensee – vom ersten Blick auf die Ausgangslage bis zur laufenden Ausführung.</p>
+        <p>Diese Aufnahmen stammen direkt von unseren Einsätzen an Dächern, Flachdächern und Balkonen rund um den Bodensee – vom ersten Blick auf die Ausgangslage bis zur laufenden Ausführung.</p>
       </div>
 
       <div class="work-grid">
         <figure class="work-card work-card-large">
-          <Image src={roofDetail} alt="Ziegeldach mit Moos und Ablagerungen vor der Reinigung" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 60vw" format="webp" quality={80} />
-          <figcaption><span>01</span><div><strong>Dachreinigung</strong><small>Ausgangslage: Moos und Ablagerungen</small></div></figcaption>
+          <Image src={roofBefore} alt="Rotes Ziegeldach mit Moos und Flechten vor der Reinigung" widths={[560, 820, 1080, 1400]} sizes="(max-width: 760px) 100vw, 60vw" format="webp" quality={80} />
+          <figcaption><span>01</span><div><strong>Dachreinigung</strong><small>Ausgangslage: Moos und Flechten</small></div></figcaption>
         </figure>
         <figure class="work-card">
-          <Image src={roofChannel} alt="Verschmutzter Dachanschluss vor den Reinigungsarbeiten" widths={[420, 620, 800]} sizes="(max-width: 760px) 100vw, 38vw" format="webp" quality={80} />
-          <figcaption><span>02</span><div><strong>Dachrinne &amp; Ränder</strong><small>Vor der Säuberung</small></div></figcaption>
+          <Image src={roofMoss} alt="Dachflächen mit starkem Moosbefall an der Kehle" widths={[420, 620, 800]} sizes="(max-width: 760px) 100vw, 38vw" format="webp" quality={80} />
+          <figcaption><span>02</span><div><strong>Moosbefall</strong><small>Dachfläche vor der Reinigung</small></div></figcaption>
         </figure>
         <figure class="work-card work-card-wide">
-          <Image src={tileRepair} alt="Ziegeldach während kleiner Reparaturarbeiten" widths={[560, 820, 1080]} sizes="(max-width: 760px) 100vw, 58vw" format="webp" quality={80} />
-          <figcaption><span>03</span><div><strong>Ziegelreparatur</strong><small>Während der Ausführung</small></div></figcaption>
+          <Image src={tileRoof} alt="Dunkles Ziegeldach mit Schornstein und Dachrinne" widths={[560, 820, 1080, 1400]} sizes="(max-width: 760px) 100vw, 100vw" format="webp" quality={80} />
+          <figcaption><span>03</span><div><strong>Ziegeldach</strong><small>Reinigung und Pflege der Dachfläche</small></div></figcaption>
+        </figure>
+      </div>
+      <div class="work-grid work-grid-flip">
+        <figure class="work-card">
+          <Image src={balconyEdge} alt="Balkon mit Plattenbelag und Kupfereinfassung am Rand" widths={[420, 620, 800]} sizes="(max-width: 760px) 100vw, 38vw" format="webp" quality={80} />
+          <figcaption><span>04</span><div><strong>Balkonsanierung</strong><small>Plattenbelag mit Kupfereinfassung</small></div></figcaption>
+        </figure>
+        <figure class="work-card work-card-large">
+          <Image src={gravelRoof} alt="Flachdach mit Kiesrand und frisch eingebrachtem Substrat" widths={[560, 820, 1080, 1400]} sizes="(max-width: 760px) 100vw, 60vw" format="webp" quality={80} />
+          <figcaption><span>05</span><div><strong>Flachdach</strong><small>Kiesrand und Substrat</small></div></figcaption>
         </figure>
       </div>
     </div>
@@ -252,7 +270,7 @@ const businessData = {
       <div class="sealing-copy">
         <span class="section-kicker">Detailabdichtung</span>
         <h2>Der Unterschied steckt im Anschluss.</h2>
-        <p>Ob Türanschluss, Balkon oder Kellerwand: Dicht wird es erst, wenn Untergrund, Vorbereitung und Ausführung zusammenpassen. Diese Aufnahmen zeigen eine von uns ausgeführte Detailabdichtung.</p>
+        <p>Ob Flachdach, Dachrinne oder Balkon: Dicht wird es erst, wenn Untergrund, Vorbereitung und Ausführung zusammenpassen. Diese Aufnahmen zeigen Detailabdichtungen aus unseren Einsätzen.</p>
         <ul class="check-list">
           <li><span>✓</span> Untergrund und Anschluss prüfen</li>
           <li><span>✓</span> Arbeitsbereich sorgfältig vorbereiten</li>
@@ -262,12 +280,12 @@ const businessData = {
       </div>
       <div class="sealing-comparison">
         <figure>
-          <Image src={sealingBefore} alt="Türanschluss während der Vorbereitung einer Abdichtung" widths={[380, 560]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
-          <figcaption>Vorbereitung</figcaption>
+          <Image src={flatRoofSealing} alt="Abgedichteter Anschluss an der Attika eines Flachdachs mit Dachablauf" widths={[380, 560, 760]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
+          <figcaption>Flachdach-Anschluss</figcaption>
         </figure>
         <figure>
-          <Image src={sealingAfter} alt="Fertig ausgeführte Abdichtung an einem Türanschluss" widths={[380, 560]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
-          <figcaption>Ausführung</figcaption>
+          <Image src={gutterSealing} alt="Abgedichtete Stoßstelle an einer Dachrinne" widths={[380, 560, 760]} sizes="(max-width: 760px) 50vw, 25vw" format="webp" quality={82} />
+          <figcaption>Dachrinne</figcaption>
         </figure>
       </div>
     </div>
